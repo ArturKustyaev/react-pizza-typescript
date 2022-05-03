@@ -1,0 +1,65 @@
+.header {
+    padding: 50px 0 35px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #F7F7F7;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    text-decoration: none;
+
+    &Icon {
+        margin-right: 17px;
+    }
+
+    &Title {
+        color: #181818;
+        font-size: 24px;
+        font-weight: 800;
+        line-height: 29px;
+        text-transform: uppercase;
+    }
+
+    &Subtitle {
+        color: #7B7B7B;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 19px;
+    }
+}
+
+.buttonCart {
+    font-size: 16px;
+    padding-left: 24px;
+    padding-right: 24px;
+
+    &_cart {
+        margin-right: 8px;
+        position: relative;
+        top: 3px;
+    }
+}
+
+.price {
+    padding-right: 13px;
+    position: relative;
+
+    &::after {
+        background-color: rgba(255, 255, 255, 0.25);
+        content: '';
+        height: 25px;
+        position: absolute;
+        right: -1px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 1px;
+    }
+}
+
+.count {
+    padding-left: 13px;
+}

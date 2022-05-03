@@ -1,0 +1,17 @@
+@import './assets/fonts/fonts.css';
+@import './assets/styles/colors.scss';
+//@import-normalize;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $bg_color;
+  margin: 0;
+  font-family: 'Proxima Nova';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
