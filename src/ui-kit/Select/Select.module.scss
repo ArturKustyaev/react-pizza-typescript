@@ -6,6 +6,15 @@
     color: inherit;
 }
 
+.arrow {
+    margin-right: 8px;
+    transform: rotate(180deg);
+
+    &_active {
+        transform: rotate(0);
+    }
+}
+
 .field {
     color: inherit;
     align-items: center;
@@ -18,8 +27,6 @@
 }
 
 .value {
-    flex-grow: 1;
-    padding-right: 15px;
     text-align: left;
 }
 
@@ -29,19 +36,19 @@
 
 .dropdown {
     background-color: #FFFFFF;
-    border-radius: 6px;
-    box-shadow: 0px 2px 15px 0px rgba(34, 60, 80, 0.2);
-    left: 0;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.09);
+    right: 0;
     max-height: 250px;
     min-width: 150px;
     opacity: 0;
-    visibility: hidden;
     overflow-y: auto;
-    padding: 5px 0;
+    padding: 10px 0;
     position: absolute;
     text-align: left;
     top: calc(100% + 8px);
     transition: opacity 0.2s ease-in-out;
+    visibility: hidden;
     width: 100%;
 
     &_active {

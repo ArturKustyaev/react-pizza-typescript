@@ -6,9 +6,11 @@ import classes from './PizzaFilter.module.scss'
 const pizzaTypes = ['Мясные', 'Вегетерианские', 'Гриль', 'Острые', 'Закрытые']
 
 export const PizzaFilter: FC = (): JSX.Element => {
+	
 	const onSelect = (selectedField: FilterValueType) => {
 		console.log(selectedField)
 	}
+	
 	return (
 		<div className={classes.nav}>
 			<ul className={classes.filter}>
@@ -20,8 +22,7 @@ export const PizzaFilter: FC = (): JSX.Element => {
 				))}
 			</ul>
 			<div className={classes.sort}>
-				<Icon className={classes.sortIcon} type='arrow' /> Сортировка по:
-				<Select className={classes.select} onSelectItem={onSelect} />
+				<Select className={classes.select} defaultItemChecked={0} onSelectItem={onSelect} />
 			</div>
 		</div>
 	)

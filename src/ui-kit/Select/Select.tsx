@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import { FC, HTMLAttributes, KeyboardEvent, useState } from 'react'
+import Icon from 'ui-kit/Icon'
 import classes from './Select.module.scss'
 
 export type FilterValueType = 'famous' | 'price' | 'alphabet'
@@ -29,19 +30,21 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 	tabIndex?: number
 	items?: Array<IFilterItem>
 	placeholder?: string
+	defaultItemChecked?: number
 	onSelectItem: (value: FilterValueType) => void
 }
 
 export const Select: FC<Props> = ({
 	className,
 	tabIndex = 0,
+	defaultItemChecked = -1,
 	items = orderFields,
-	placeholder = 'Select something...',
+	placeholder = 'Выберите...',
 	onSelectItem,
 	...rest
 }): JSX.Element => {
 	const [isDropdownVisible, setIsDropdownVisible] = useState<boolean>(false)
-	const [selectedIndex, setSelectedIndex] = useState<number>(-1)
+	const [selectedIndex, setSelectedIndex] = useState<number>(defaultItemChecked)
 
 	const toggleDropdownClickHandler = () => {
 		setIsDropdownVisible(!isDropdownVisible)
@@ -86,42 +89,51 @@ export const Select: FC<Props> = ({
 	}
 
 	return (
-		<div
-			className={classNames(classes.select, className)}
-			tabIndex={tabIndex}
-			role='combobox'
-			onClick={toggleDropdownClickHandler}
-			onKeyDown={keyDownHandler}
-			onBlur={closeHandler}
-			{...rest}
-		>
-			<div className={classNames(classes.field)}>
-				<span
-					className={classNames(classes.value, {
-						[classes.placeholder]: selectedIndex === -1
-					})}
-				>
-					{selectedIndex !== -1 ? items[selectedIndex].text : placeholder}
-				</span>
-			</div>
-			<ul
-				className={classNames(classes.dropdown, {
-					[classes.dropdown_active]: isDropdownVisible
+		<>
+			<Icon
+				className={classNames(classes.arrow, {
+					[classes.arrow_active]: isDropdownVisible
 				})}
-				data-testid='test-dropdown'
+				type='arrow'
+			/>
+			Сортировка по:
+			<div
+				className={classNames(classes.select, className)}
+				tabIndex={tabIndex}
+				role='combobox'
+				onClick={toggleDropdownClickHandler}
+				onKeyDown={keyDownHandler}
+				onBlur={closeHandler}
+				{...rest}
 			>
-				{items.map((item, index) => (
-					<li
-						className={classNames(classes.item, {
-							[classes.itemSelected]: index === selectedIndex
+				<div className={classNames(classes.field)}>
+					<span
+						className={classNames(classes.value, {
+							[classes.placeholder]: selectedIndex === -1
 						})}
-						key={item.value}
-						onClick={() => clickHandler(index)}
 					>
-						{item.text}
-					</li>
-				))}
-			</ul>
-		</div>
+						{selectedIndex !== -1 ? items[selectedIndex].text : placeholder}
+					</span>
+				</div>
+				<ul
+					className={classNames(classes.dropdown, {
+						[classes.dropdown_active]: isDropdownVisible
+					})}
+					data-testid='test-dropdown'
+				>
+					{items.map((item, index) => (
+						<li
+							className={classNames(classes.item, {
+								[classes.itemSelected]: index === selectedIndex
+							})}
+							key={item.value}
+							onClick={() => clickHandler(index)}
+						>
+							{item.text}
+						</li>
+					))}
+				</ul>
+			</div>
+		</>
 	)
 }

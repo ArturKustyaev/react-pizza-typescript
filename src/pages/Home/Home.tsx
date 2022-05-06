@@ -1,4 +1,4 @@
-import { Container, Layout, PizzaFilter } from 'components'
+import { Container, Layout, PizzaFilter, PizzaList } from 'components'
 import { Header } from 'layout'
 import { FC } from 'react'
 
@@ -9,6 +9,7 @@ export const Home: FC = (): JSX.Element => {
 				<Container>
 					<Header />
 					<PizzaFilter />
+					<PizzaList />
 				</Container>
 			</Layout>
 		</div>
