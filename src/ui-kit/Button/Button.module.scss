@@ -7,15 +7,39 @@
     border: 1px solid $orange;
     color: white;
     cursor: pointer;
+    display: inline-flex;
     font-size: 16px;
     font-weight: 700;
+    justify-content: center;
     line-height: 38px;
     padding: 0 15px;
-    transition: background-color 0.2s, border 0.2s;
+    transition: background-color 0.2s, border 0.2s, color 0.2s;
 
     &:hover {
         background-color: lighten($orange, 15%);
         border-color: lighten($orange, 15%);
+    }
+
+    &_outlined {
+        background-color: white;
+        border-color: $orange;
+        color: $orange;
+
+        &:hover {
+            border-color: darken($orange, 10%);
+            color: darken($orange, 10%);
+            background-color: #e8e8e838;
+        }
+    }
+
+    &_black {
+        background-color: #282828;
+        border-color: #282828;
+
+        &:hover {
+            background-color: lighten(#282828, 15%);
+            border-color: lighten(#282828, 15%);
+        }
     }
 
     &_disabled {

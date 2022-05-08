@@ -1,0 +1,54 @@
+@mixin line {
+    background-color: #FE5F1E;
+    border-radius: 10px;
+    border: 1px solid #FE5F1E;
+    content: '';
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.button {
+    background-color: white;
+    border-radius: 50%;
+    border: 2px solid #FE5F1E;
+    cursor: pointer;
+    height: 32px;
+    position: relative;
+    width: 32px;
+
+    &_minus {
+        &::after {
+            @include line;
+            width: 9px;
+        }
+    }
+
+    &_plus {
+        &::before {
+            @include line;
+            height: 9px;
+        }
+
+        &::after {
+            @include line;
+            width: 9px;
+        }
+    }
+
+    &_delete {
+        transform: rotate(45deg);
+
+        &::before {
+            @include line;
+            height: 9px;
+        }
+
+        &::after {
+            @include line;
+            width: 9px;
+        }
+    }
+}

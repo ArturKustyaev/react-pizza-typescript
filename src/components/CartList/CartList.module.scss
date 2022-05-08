@@ -1,0 +1,99 @@
+.root {
+    margin: 94px auto 0 auto;
+    max-width: 830px;
+}
+
+.cartIcon {
+    height: 40px;
+    margin-right: 17px;
+    position: relative;
+    stroke: black;
+    top: 2px;
+    width: 40px;
+}
+
+.titleBlock {
+    align-items: center;
+    display: flex;
+    font-size: 32px;
+    font-weight: 700;
+    justify-content: space-between;
+    letter-spacing: 0.01em;
+    padding-bottom: 30px;
+}
+
+.buttonTrash {
+    background-color: transparent;
+    border: none;
+    font-weight: 400;
+    font-size: 16px;
+    color: #B6B6B6;
+    display: flex;
+    align-items: center;
+}
+
+.trashIcon {
+    position: relative;
+    bottom: 1px;
+}
+
+.cartList {
+    list-style: none;
+    margin-bottom: 10px;
+}
+
+.orderInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 27px;
+    margin-bottom: 40px;
+}
+
+.totalCount {
+    font-weight: 700;
+}
+
+.totalPrice {
+    font-weight: 700;
+    color: #FE5F1E;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttonBack,
+.buttonPay {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 53px;
+    max-width: 210px;
+    width: 100%;
+}
+
+.buttonBack {
+    border-color: #D3D3D3;
+    color: #D3D3D3;
+
+    &:hover {
+        border-color: darken(#D3D3D3, 10%);
+        color: darken(#D3D3D3, 10%)
+    }
+
+    &:hover .arrowIcon {
+        stroke: darken(#D3D3D3, 10%);
+    }
+}
+
+.arrowIcon {
+    position: relative;
+    bottom: 1px;
+    margin-right: 15px;
+    height: 14px;
+    width: 8px;
+    stroke: #D3D3D3;
+}

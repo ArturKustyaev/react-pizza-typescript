@@ -1,23 +1,66 @@
-import React, { FC } from 'react'
-import { Icon, Select } from 'ui-kit'
+import classNames from 'classnames'
+import { FC, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { setPizzaType } from 'store/actions'
+import { AppStateType } from 'store/reducers'
+import { PizzaType } from 'store/reducers/pizzasReducer'
+import { Button, Select } from 'ui-kit'
 import { FilterValueType } from 'ui-kit/Select/Select'
 import classes from './PizzaFilter.module.scss'
 
-const pizzaTypes = ['Мясные', 'Вегетерианские', 'Гриль', 'Острые', 'Закрытые']
+interface IPizzaType {
+	value: PizzaType
+	text: string
+}
+
+const pizzaTypes: IPizzaType[] = [
+	{
+		value: 'all',
+		text: 'Все'
+	},
+	{
+		value: 'meat',
+		text: 'Мясные'
+	},
+	{
+		value: 'vegan',
+		text: 'Вегетерианские'
+	},
+	{
+		value: 'grill',
+		text: 'Гриль'
+	},
+	{
+		value: 'spicy',
+		text: 'Острые'
+	}
+]
 
 export const PizzaFilter: FC = (): JSX.Element => {
-	
+	const { pizzaType: storePizzaType } = useSelector((state: AppStateType) => state.pizzas)
+	const dispatch = useDispatch()
+
 	const onSelect = (selectedField: FilterValueType) => {
 		console.log(selectedField)
 	}
-	
+
+	const selectPizzaTypeHandler = (pizzaType: PizzaType) => {
+		dispatch(setPizzaType(pizzaType))
+	}
+
 	return (
 		<div className={classes.nav}>
 			<ul className={classes.filter}>
-				<li className={classes.item}>Все</li>
 				{pizzaTypes.map(pizzaType => (
-					<li key={pizzaType} className={classes.item}>
-						{pizzaType}
+					<li key={pizzaType.value}>
+						<Button
+							className={classNames(classes.buttonPizzaType, {
+								[classes.buttonPizzaType_active]: storePizzaType === pizzaType.value
+							})}
+							onClick={() => selectPizzaTypeHandler(pizzaType.value)}
+						>
+							{pizzaType.text}
+						</Button>
 					</li>
 				))}
 			</ul>

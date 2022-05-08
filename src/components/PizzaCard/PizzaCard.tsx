@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import { FC, HTMLAttributes } from 'react'
+import { PizzaType } from 'store/reducers/pizzasReducer'
 import { Button } from 'ui-kit'
 import classes from './PizzaCard.module.scss'
 
@@ -14,6 +15,7 @@ export interface IPizza {
 	img: string
 	availableDough: number[]
 	aviableSizes: number[]
+	type: PizzaType | string
 	price: number
 }
 

@@ -4,14 +4,12 @@ import { FC } from 'react'
 
 export const Home: FC = (): JSX.Element => {
 	return (
-		<div>
-			<Layout>
-				<Container>
-					<Header />
-					<PizzaFilter />
-					<PizzaList />
-				</Container>
-			</Layout>
-		</div>
+		<Layout>
+			<Container>
+				<Header />
+				<PizzaFilter />
+				<PizzaList />
+			</Container>
+		</Layout>
 	)
 }

@@ -12,23 +12,26 @@
     display: flex;
 }
 
-.item {
+.buttonPizzaType {
     background-color: #F9F9F9;
-    border-radius: 30px;
+    border-color: #F9F9F9;
     color: #2C2C2C;
-    cursor: pointer;
-    display: inline-block;
     font-size: 16px;
     font-weight: 700;
     line-height: 46px;
     margin-right: 10px;
     padding-left: 25px;
     padding-right: 25px;
-    text-align: center;
-    transition: background-color 0.2s, color 0.2s;
 
     &:hover {
         background-color: #2C2C2C;
+        border-color: #2C2C2C;
+        color: #F9F9F9;
+    }
+
+    &_active {
+        background-color: #2C2C2C;
+        border-color: #2C2C2C;
         color: #F9F9F9;
     }
 }

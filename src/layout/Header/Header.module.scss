@@ -7,8 +7,8 @@
 }
 
 .logo {
-    display: flex;
     align-items: center;
+    display: flex;
     text-align: left;
     text-decoration: none;
 
@@ -17,6 +17,7 @@
     }
 
     &Title {
+        cursor: pointer;
         color: #181818;
         font-size: 24px;
         font-weight: 800;
@@ -25,6 +26,7 @@
     }
 
     &Subtitle {
+        cursor: pointer;
         color: #7B7B7B;
         font-size: 16px;
         font-weight: 400;
@@ -36,6 +38,7 @@
     font-size: 16px;
     padding-left: 24px;
     padding-right: 24px;
+
 
     &_cart {
         margin-right: 8px;
