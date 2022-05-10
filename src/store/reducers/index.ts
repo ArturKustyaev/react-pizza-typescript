@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
-import photosReducer from './pizzasReducer'
+import cartReducer from './cartReducer'
+import pizzasReducer from './pizzasReducer'
 
 const rootReducer = combineReducers({
-	pizzas: photosReducer
+	pizzas: pizzasReducer,
+	cart: cartReducer
 })
 
 type RootReducerType = typeof rootReducer

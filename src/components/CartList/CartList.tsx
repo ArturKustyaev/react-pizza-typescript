@@ -1,13 +1,14 @@
 import CartItem from 'components/CartItem'
+import { ICartPizza } from 'components/CartItem/CartItem'
 import { FC } from 'react'
-import { useSelector } from 'react-redux'
-import { AppStateType } from 'store/reducers'
 import { Button, Icon } from 'ui-kit'
 import classes from './CartList.module.scss'
 
-export const CartList: FC = (): JSX.Element => {
-	const { pizzas } = useSelector((state: AppStateType) => state.pizzas)
+interface Props {
+	pizzas: ICartPizza[]
+}
 
+export const CartList: FC<Props> = ({ pizzas }): JSX.Element => {
 	return (
 		<div className={classes.root}>
 			<div className={classes.titleBlock}>

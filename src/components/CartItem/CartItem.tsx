@@ -1,10 +1,18 @@
-import { IPizza } from 'components/PizzaCard/PizzaCard'
 import { FC } from 'react'
 import { CircleButton } from 'ui-kit'
 import classes from './CartItem.module.scss'
 
+export interface ICartPizza {
+	id: number
+	title: string
+	img: string
+	dough: string
+	size: number
+	price: number
+}
+
 interface Props {
-	pizza: IPizza
+	pizza: ICartPizza
 }
 
 export const CartItem: FC<Props> = ({ pizza }): JSX.Element => {
@@ -13,15 +21,14 @@ export const CartItem: FC<Props> = ({ pizza }): JSX.Element => {
 			<img className={classes.img} src={pizza.img} alt={`Пицца: ${pizza.title}`} />
 			<div className={classes.info}>
 				<p className={classes.title}>{pizza.title}</p>
-				<p className={classes.params}>тонкое тесто, 26см.</p>
+				<p className={classes.params}> {`${pizza.dough}, ${pizza.size} см.`}</p>
 			</div>
 			<div className={classes.countBlock}>
 				<CircleButton type='minus' />
 				<span className={classes.count}>1</span>
 				<CircleButton type='plus' />
-				
 			</div>
-			<p className={classes.price}>785 ₽</p>
+			<p className={classes.price}>{`${pizza.price} ₽`}</p>
 			<CircleButton className={classes.buttonDelete} type='delete' />
 		</div>
 	)

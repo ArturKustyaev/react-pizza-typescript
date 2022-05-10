@@ -1,7 +1,5 @@
-import { IPizza } from 'components/PizzaCard/PizzaCard'
+import { IPizza, PizzaType } from 'components/PizzaCard/PizzaCard'
 import { ActionType, ActionCreatorType } from '../actions/types'
-
-export type PizzaType = 'all' | 'meat' | 'vegan' | 'grill' | 'spicy'
 
 interface IInitialState {
 	pizzas: IPizza[]
@@ -17,7 +15,7 @@ const initialState: IInitialState = {
 	pizzaType: 'all'
 }
 
-const photosReducer = (
+const pizzasReducer = (
 	state: IInitialState = initialState,
 	action: ActionCreatorType
 ): IInitialState => {
@@ -45,4 +43,4 @@ const photosReducer = (
 	}
 }
 
-export default photosReducer
+export default pizzasReducer

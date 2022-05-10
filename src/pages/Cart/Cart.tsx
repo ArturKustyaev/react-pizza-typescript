@@ -1,16 +1,18 @@
 import { CartList, Container, Layout } from 'components'
-import EmpryCart from 'components/EmpryCart'
+import EmpryCart from 'components/EmptyCart'
 import { Header } from 'layout'
 import { FC } from 'react'
+import { useSelector } from 'react-redux'
+import { AppStateType } from 'store/reducers'
 
 export const Cart: FC = (): JSX.Element => {
-	const a = 4
-	
+	const { cartPizzas } = useSelector((state: AppStateType) => state.cart)
+
 	return (
 		<Layout>
 			<Container>
 				<Header isCartButtonHide={true} />
-				{a > 0 ? <CartList /> : <EmpryCart />}
+				{cartPizzas.length ? <CartList pizzas={cartPizzas} /> : <EmpryCart />}
 			</Container>
 		</Layout>
 	)

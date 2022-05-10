@@ -1,6 +1,8 @@
 import classNames from 'classnames'
-import { FC, HTMLAttributes } from 'react'
-import { PizzaType } from 'store/reducers/pizzasReducer'
+import { ICartPizza } from 'components/CartItem/CartItem'
+import { FC, HTMLAttributes, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { addPizza } from 'store/actions/cartActions'
 import { Button } from 'ui-kit'
 import classes from './PizzaCard.module.scss'
 
@@ -13,31 +15,82 @@ export interface IPizza {
 	id: number
 	title: string
 	img: string
-	availableDough: number[]
+	availableDough: string[]
 	aviableSizes: number[]
 	type: PizzaType | string
 	price: number
 }
 
+export type PizzaType = 'all' | 'meat' | 'vegan' | 'grill' | 'spicy'
+
+type pizzaParamsType = {
+	dough: string
+	size: number
+}
 export const PizzaCard: FC<Props> = ({ className, pizza }): JSX.Element => {
+	const dispatch = useDispatch()
+
+	const [pizzaParams, setPizzaParams] = useState<pizzaParamsType>({
+		dough: pizza.availableDough[0],
+		size: pizza.aviableSizes[0]
+	})
+
+	const setPizzaDoughtHandler = (dough: string) => {
+		setPizzaParams({ ...pizzaParams, dough: dough })
+	}
+
+	const setPizzaSizeHandler = (size: number) => {
+		setPizzaParams({ ...pizzaParams, size: size })
+	}
+
+	const addPizzaInCartHandler = () => {
+		const cartPizza: ICartPizza = {
+			id: pizza.id,
+			title: pizza.title,
+			img: pizza.img,
+			dough: pizzaParams.dough,
+			size: pizzaParams.size,
+			price: pizza.price
+		}
+
+		dispatch(addPizza(cartPizza))
+	}
+
 	return (
 		<div className={classNames(classes.pizzaCard, className)}>
 			<img className={classes.img} src={pizza.img} alt={`Пицца: ${pizza.title}`} />
 			<p className={classes.title}>{pizza.title}</p>
 			<div className={classes.params}>
 				<div className={classes.dough}>
-					<button className={classes.button}>тонкое</button>
-					<button className={classes.button}>традиционное</button>
+					{pizza.availableDough.map(dough => (
+						<button
+							className={classNames(classes.button, {
+								[classes.button_active]: dough === pizzaParams.dough
+							})}
+							key={dough}
+							onClick={() => setPizzaDoughtHandler(dough)}
+						>
+							{dough}
+						</button>
+					))}
 				</div>
 				<div className={classes.sizes}>
-					<button className={classes.button}>25см.</button>
-					<button className={classes.button}>35см.</button>
-					<button className={classes.button}>45см.</button>
+					{pizza.aviableSizes.map(size => (
+						<button
+							className={classNames(classes.button, {
+								[classes.button_active]: size === pizzaParams.size
+							})}
+							key={size}
+							onClick={() => setPizzaSizeHandler(size)}
+						>
+							{`${size} см.`}
+						</button>
+					))}
 				</div>
 			</div>
 			<div className={classes.actions}>
 				<p className={classes.price}>{`от ${pizza.price} ₽`} </p>
-				<Button>Добавить</Button>
+				<Button  onClick={addPizzaInCartHandler}>Добавить</Button>
 			</div>
 		</div>
 	)

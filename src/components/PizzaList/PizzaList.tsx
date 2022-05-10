@@ -13,7 +13,6 @@ export const PizzaList: FC = (): JSX.Element => {
 	const navigate = useNavigate()
 
 	useEffect(() => {
-		console.log(data.pizzas)
 		dispatch(setPizzas(data.pizzas))
 		
 		navigate({

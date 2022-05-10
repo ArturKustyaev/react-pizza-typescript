@@ -4,7 +4,7 @@
 			"id": 1,
 			"title": "Пепперони",
 			"img": "https://spb13saransk.ru/images/virtuemart/product/1_pepperoni_kvadrat.jpg",
-			"availableDough": [0, 1],
+			"availableDough": ["тонкое", "традиционное"],
 			"aviableSizes": [26, 35, 40],
 			"type": "grill",
 			"price": 395
@@ -13,7 +13,7 @@
 			"id": 2,
 			"title": "Мясная",
 			"img": "https://spb13saransk.ru/images/virtuemart/product/resized/4_myasnaya_kvadrat9_700x800.jpg",
-			"availableDough": [1],
+			"availableDough": ["тонкое", "традиционное"],
 			"aviableSizes": [26, 40],
 			"type": "meat",
 			"price": 415
@@ -22,7 +22,7 @@
 			"id": 3,
 			"title": "Грибная",
 			"img": "https://spb13saransk.ru/images/virtuemart/product/resized/10_gribnaya_kvadrat_700x800.jpg",
-			"availableDough": [0, 1],
+			"availableDough": ["тонкое"],
 			"aviableSizes": [26, 35, 40],
 			"type": "spicy",
 			"price": 350

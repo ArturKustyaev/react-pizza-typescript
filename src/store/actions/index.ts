@@ -1,5 +1,4 @@
-import { IPizza } from 'components/PizzaCard/PizzaCard'
-import { PizzaType } from 'store/reducers/pizzasReducer'
+import { IPizza, PizzaType } from 'components/PizzaCard/PizzaCard'
 import { ActionCreatorType, ActionType } from './types'
 
 export const setPizzas = (pizzas: IPizza[]): ActionCreatorType => ({
