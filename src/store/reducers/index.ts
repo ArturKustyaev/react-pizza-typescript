@@ -1,14 +1,9 @@
-import { combineReducers } from 'redux'
-import cartReducer from './cartReducer'
-import pizzasReducer from './pizzasReducer'
+import cartReducer, {
+    addPizzaToCart, deleteAllPizzasFromCart, deletePizzaFromCart
+} from './cartReducer'
+import pizzasReducer, { fetchPizzas } from './pizzasReducer'
 
-const rootReducer = combineReducers({
-	pizzas: pizzasReducer,
-	cart: cartReducer
-})
+export { cartReducer, pizzasReducer }
+export { addPizzaToCart, deletePizzaFromCart, fetchPizzas, deleteAllPizzasFromCart }
 
-type RootReducerType = typeof rootReducer
 
-export type AppStateType = ReturnType<RootReducerType>
-
-export default rootReducer

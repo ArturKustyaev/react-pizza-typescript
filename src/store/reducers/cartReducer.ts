@@ -1,40 +1,40 @@
-import { ICartPizza } from 'components/CartItem/CartItem'
-import { ActionCreatorType, ActionType } from 'store/actions/cartActions/types'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { ICartPizza } from 'models'
 
 interface IInitialState {
-	cartPizzas: ICartPizza[]
-	error: string | null
-	isFetching: boolean
+	cartPizzas: { [key: string]: ICartPizza[] }
 }
 
 const initialState: IInitialState = {
-	cartPizzas: [],
-	error: null,
-	isFetching: false
+	cartPizzas: {}
 }
 
-const cartReducer = (
-	state: IInitialState = initialState,
-	action: ActionCreatorType
-): IInitialState => {
-	switch (action.type) {
-		case ActionType.SET_CART_PIZZAS: {
-			return {
-				...state,
-				isFetching: false,
-				error: null,
-				cartPizzas: [...action.payload]
+const cartSlice = createSlice({
+	name: 'cart',
+	initialState,
+	reducers: {
+		addPizzaToCart(state, action: PayloadAction<ICartPizza>) {
+			if (!state.cartPizzas[action.payload.id]) {
+				state.cartPizzas[action.payload.id] = []
 			}
+
+			const addedPizzaIndex = state.cartPizzas[action.payload.id].findIndex(
+				pizza => pizza.dough === action.payload.dough && pizza.size === action.payload.size
+			)
+
+			addedPizzaIndex != -1
+				? (state.cartPizzas[action.payload.id][addedPizzaIndex].count += 1)
+				: state.cartPizzas[action.payload.id].push(action.payload)
+		},
+		deletePizzaFromCart(state, action: PayloadAction<number>) {
+			//state.cartPizzas = state.cartPizzas[action.payload]
+		},
+		deleteAllPizzasFromCart(state) {
+			state.cartPizzas = {}
 		}
-		case ActionType.ADD_PIZZA: {
-			return {
-				...state,
-				cartPizzas: [...state.cartPizzas, action.payload]
-			}
-		}
-		default:
-			return state
 	}
-}
+})
 
-export default cartReducer
+export const { addPizzaToCart, deletePizzaFromCart, deleteAllPizzasFromCart } = cartSlice.actions
+
+export default cartSlice.reducer

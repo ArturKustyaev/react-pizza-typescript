@@ -1,5 +1,6 @@
-import { IPizza, PizzaType } from 'components/PizzaCard/PizzaCard'
-import { ActionType, ActionCreatorType } from '../actions/types'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { pizzasApi } from 'api'
+import { IPizza, PizzaType } from 'models'
 
 interface IInitialState {
 	pizzas: IPizza[]
@@ -15,32 +16,38 @@ const initialState: IInitialState = {
 	pizzaType: 'all'
 }
 
-const pizzasReducer = (
-	state: IInitialState = initialState,
-	action: ActionCreatorType
-): IInitialState => {
-	switch (action.type) {
-		case ActionType.SET_PIZZAS: {
-			return {
-				...state,
-				isFetching: false,
-				error: null,
-				pizzas: [
-					...action.payload.filter(pizza =>
-						state.pizzaType !== 'all' ? pizza.type === state.pizzaType : pizza
-					)
-				]
-			}
+const fetchPizzas = createAsyncThunk<IPizza[], undefined, { rejectValue: string }>(
+	'pizzas/fetchPizzas',
+	async (_, { rejectWithValue }) => {
+		try {
+			const response = await pizzasApi.fetchPizzas()
+			return response.data
+		} catch (e) {
+			return rejectWithValue('Ошибка при загрузке пицц!')
 		}
-		case ActionType.SET_PIZZA_TYPE: {
-			return {
-				...state,
-				pizzaType: action.payload
-			}
-		}
-		default:
-			return state
 	}
-}
+)
 
-export default pizzasReducer
+const pizzasSlice = createSlice({
+	name: 'pizzas',
+	initialState,
+	reducers: {},
+	extraReducers: builder => {
+		builder.addCase(fetchPizzas.pending, state => {
+			state.error = ''
+			state.isFetching = true
+		})
+		builder.addCase(fetchPizzas.fulfilled, (state, action) => {
+			state.pizzas = action.payload
+			state.isFetching = false
+		})
+		builder.addCase(fetchPizzas.rejected, (state, action) => {
+			state.error = action.payload || 'ошибка'
+			state.isFetching = false
+		})
+	}
+})
+
+export { fetchPizzas }
+
+export default pizzasSlice.reducer

@@ -1,20 +1,25 @@
 import PizzaCard from 'components/PizzaCard'
+import { useAppDispatch, useAppSelector } from 'hooks'
+import { ICartPizza } from 'models'
 import { FC, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { createSearchParams, useNavigate } from 'react-router-dom'
-import { setPizzas } from 'store/actions'
-import { AppStateType } from 'store/reducers'
-import data from '../../data.json'
+import { addPizzaToCart } from 'store/reducers'
+import { fetchPizzas } from 'store/reducers/pizzasReducer'
 import classes from './PizzaList.module.scss'
 
 export const PizzaList: FC = (): JSX.Element => {
-	const { pizzas, pizzaType } = useSelector((state: AppStateType) => state.pizzas)
-	const dispatch = useDispatch()
+	const { pizzas, pizzaType } = useAppSelector(state => state.pizzas)
+	const dispatch = useAppDispatch()
+
 	const navigate = useNavigate()
 
+	const onAddPizzaToCart = (pizza: ICartPizza) => {
+		dispatch(addPizzaToCart(pizza))
+	}
+
 	useEffect(() => {
-		dispatch(setPizzas(data.pizzas))
-		
+		dispatch(fetchPizzas())
+
 		navigate({
 			search: `?${createSearchParams({
 				pizza_type: pizzaType
@@ -27,7 +32,12 @@ export const PizzaList: FC = (): JSX.Element => {
 			<h1 className={classes.title}>Все пиццы</h1>
 			<div className={classes.pizzaList}>
 				{pizzas.map(pizza => (
-					<PizzaCard className={classes.pizzaCard} key={pizza.id} pizza={pizza} />
+					<PizzaCard
+						className={classes.pizzaCard}
+						key={pizza.id}
+						pizza={pizza}
+						onAddPizzaToCart={onAddPizzaToCart}
+					/>
 				))}
 			</div>
 		</div>

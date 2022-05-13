@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { ButtonHTMLAttributes, FC, ReactNode } from 'react'
+import { ButtonHTMLAttributes, FC, memo, ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import classes from './Button.module.scss'
 
@@ -15,7 +15,7 @@ interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	disabled?: boolean
 }
 
-export const Button: FC<IButtonProps> = ({
+export const Button: FC<IButtonProps> = memo(({
 	className,
 	children,
 	color = 'orange',
@@ -39,4 +39,4 @@ export const Button: FC<IButtonProps> = ({
 			{children}
 		</button>
 	)
-}
+})

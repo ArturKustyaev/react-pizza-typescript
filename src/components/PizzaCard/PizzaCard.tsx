@@ -1,35 +1,24 @@
 import classNames from 'classnames'
-import { ICartPizza } from 'components/CartItem/CartItem'
+import { count } from 'console'
+import { useAppDispatch } from 'hooks'
+import { ICartPizza, IPizza } from 'models'
 import { FC, HTMLAttributes, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { addPizza } from 'store/actions/cartActions'
+import { AppDispatch } from 'store'
+import { addPizzaToCart } from 'store/reducers/cartReducer'
 import { Button } from 'ui-kit'
 import classes from './PizzaCard.module.scss'
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
 	className?: string
 	pizza: IPizza
+	onAddPizzaToCart: (pizza: ICartPizza) => void
 }
-
-export interface IPizza {
-	id: number
-	title: string
-	img: string
-	availableDough: string[]
-	aviableSizes: number[]
-	type: PizzaType | string
-	price: number
-}
-
-export type PizzaType = 'all' | 'meat' | 'vegan' | 'grill' | 'spicy'
 
 type pizzaParamsType = {
 	dough: string
 	size: number
 }
-export const PizzaCard: FC<Props> = ({ className, pizza }): JSX.Element => {
-	const dispatch = useDispatch()
-
+export const PizzaCard: FC<Props> = ({ className, pizza, onAddPizzaToCart }): JSX.Element => {
 	const [pizzaParams, setPizzaParams] = useState<pizzaParamsType>({
 		dough: pizza.availableDough[0],
 		size: pizza.aviableSizes[0]
@@ -50,10 +39,11 @@ export const PizzaCard: FC<Props> = ({ className, pizza }): JSX.Element => {
 			img: pizza.img,
 			dough: pizzaParams.dough,
 			size: pizzaParams.size,
-			price: pizza.price
+			price: pizza.price,
+			count: 1
 		}
 
-		dispatch(addPizza(cartPizza))
+		onAddPizzaToCart(cartPizza)
 	}
 
 	return (
@@ -90,7 +80,7 @@ export const PizzaCard: FC<Props> = ({ className, pizza }): JSX.Element => {
 			</div>
 			<div className={classes.actions}>
 				<p className={classes.price}>{`от ${pizza.price} ₽`} </p>
-				<Button  onClick={addPizzaInCartHandler}>Добавить</Button>
+				<Button onClick={addPizzaInCartHandler}>Добавить</Button>
 			</div>
 		</div>
 	)

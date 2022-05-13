@@ -1,0 +1,77 @@
+{
+	"pizzas": [
+		{
+			"id": 1,
+			"title": "Пепперони",
+			"img": "https://dodopizza-a.akamaihd.net/static/Img/Products/bf3377af7cfe4962915668d14bb8d0f4_584x584.jpeg",
+			"availableDough": ["тонкое", "традиционное"],
+			"aviableSizes": [26, 35, 40],
+			"type": "grill",
+			"price": 395
+		},
+		{
+			"id": 2,
+			"title": "Мясная",
+			"img": "https://dodopizza-a.akamaihd.net/static/Img/Products/afb7bb96c6624a17b69543db3b340c86_584x584.jpeg",
+			"availableDough": ["тонкое", "традиционное"],
+			"aviableSizes": [26, 40],
+			"type": "meat",
+			"price": 415
+		},
+		{
+			"id": 3,
+			"title": "Грибная",
+			"img": "https://dodopizza-a.akamaihd.net/static/Img/Products/aa845b6e841241fbbff1a770b3ad3103_584x584.jpeg",
+			"availableDough": ["тонкое"],
+			"aviableSizes": [26, 35, 40],
+			"type": "spicy",
+			"price": 350
+		},
+		{
+			"id": 4,
+			"title": "Диабло",
+			"img": "https://dodopizza-a.akamaihd.net/static/Img/Products/2ac448e39ba24623a33c1d8d50b69ef8_584x584.jpeg",
+			"availableDough": ["тонкое", "традиционное"],
+			"aviableSizes": [25, 30, 40],
+			"type": "spicy",
+			"price": 750
+		},
+
+		{
+			"id": 5,
+			"title": "Ветчина и сыр",
+			"img": "https://dodopizza-a.akamaihd.net/static/Img/Products/5630c6ed3f394c7ba25e1ef79a67b7ee_584x584.jpeg",
+			"availableDough": ["тонкое", "традиционное"],
+			"aviableSizes": [25, 30, 40],
+			"type": "meat",
+			"price": 940
+		},
+		{
+			"id": 6,
+			"title": "Ветчина и грибы",
+			"img": "https://dodopizza-a.akamaihd.net/static/Img/Products/aa845b6e841241fbbff1a770b3ad3103_584x584.jpeg",
+			"availableDough": ["тонкое", "традиционное"],
+			"aviableSizes": [25, 30, 40],
+			"type": "mushroom",
+			"price": 750
+		},
+		{
+			"id": 7,
+			"title": "Овощная",
+			"img": "https://dodopizza-a.akamaihd.net/static/Img/Products/3a9785bc5ac145118403de7d22b70fd9_584x584.jpeg",
+			"availableDough": ["тонкое", "традиционное"],
+			"aviableSizes": [25, 30, 40],
+			"type": "mushroom",
+			"price": 500
+		},
+		{
+			"id": 8,
+			"title": "Супер мясная",
+			"img": "https://dodopizza-a.akamaihd.net/static/Img/Products/5b5d246f1d154bd39f606d1d72899a27_584x584.jpeg",
+			"availableDough": ["тонкое", "традиционное"],
+			"aviableSizes": [25, 30, 40],
+			"type": "meat",
+			"price": 500
+		}
+	]
+}

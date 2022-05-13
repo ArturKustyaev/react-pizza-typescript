@@ -23,18 +23,28 @@
 }
 
 .buttonTrash {
+    align-items: center;
     background-color: transparent;
     border: none;
-    font-weight: 400;
-    font-size: 16px;
     color: #B6B6B6;
+    cursor: pointer;
     display: flex;
-    align-items: center;
+    font-size: 16px;
+    font-weight: 400;
+
+    &:hover {
+        color: darken(#B6B6B6, 10%);
+    }
+
+    &:hover .trashIcon {
+        stroke: darken(#B6B6B6, 10%);
+    }
 }
 
 .trashIcon {
-    position: relative;
     bottom: 1px;
+    position: relative;
+    stroke: #B6B6B6;
 }
 
 .cartList {
@@ -53,12 +63,16 @@
 }
 
 .totalCount {
+    display: inline-block;
     font-weight: 700;
+    margin-left: 8px;
 }
 
 .totalPrice {
-    font-weight: 700;
     color: #FE5F1E;
+    display: inline-block;
+    font-weight: 700;
+    margin-left: 8px;
 }
 
 .actions {

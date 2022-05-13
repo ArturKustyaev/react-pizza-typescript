@@ -1,12 +1,16 @@
-import { applyMiddleware, compose, createStore } from 'redux'
-import thunk from 'redux-thunk'
-import rootReducer from './reducers'
+import { configureStore } from '@reduxjs/toolkit'
+import { combineReducers } from 'redux'
+import { pizzasReducer, cartReducer } from './reducers'
 
-const store = createStore(
-	rootReducer,
-	compose(applyMiddleware(thunk), 
-	//@ts-ignore 
-	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
-)
+const store = configureStore({
+	reducer: combineReducers({
+		pizzas: pizzasReducer,
+		cart: cartReducer
+	})
+})
+
+export type RootState = ReturnType<typeof store.getState>
+
+export type AppDispatch = typeof store.dispatch
 
 export default store

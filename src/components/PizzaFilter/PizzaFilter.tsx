@@ -1,9 +1,7 @@
 import classNames from 'classnames'
-import { PizzaType } from 'components/PizzaCard/PizzaCard'
-import { FC, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { setPizzaType } from 'store/actions'
-import { AppStateType } from 'store/reducers'
+import { PizzaType } from 'models'
+import { FC, useCallback } from 'react'
+import { useDispatch } from 'react-redux'
 import { Button, Select } from 'ui-kit'
 import { FilterValueType } from 'ui-kit/Select/Select'
 import classes from './PizzaFilter.module.scss'
@@ -27,8 +25,8 @@ const pizzaTypes: IPizzaType[] = [
 		text: 'Вегетерианские'
 	},
 	{
-		value: 'grill',
-		text: 'Гриль'
+		value: 'mushroom',
+		text: 'Грибные'
 	},
 	{
 		value: 'spicy',
@@ -37,15 +35,15 @@ const pizzaTypes: IPizzaType[] = [
 ]
 
 export const PizzaFilter: FC = (): JSX.Element => {
-	const { pizzaType: storePizzaType } = useSelector((state: AppStateType) => state.pizzas)
+	//const { pizzaType: storePizzaType } = useSelector((state: AppStateType) => state.pizzas)
 	const dispatch = useDispatch()
 
-	const onSelect = (selectedField: FilterValueType) => {
+	const onSelect = useCallback((selectedField: FilterValueType) => {
 		console.log(selectedField)
-	}
+	}, [])
 
 	const selectPizzaTypeHandler = (pizzaType: PizzaType) => {
-		dispatch(setPizzaType(pizzaType))
+		//	dispatch(setPizzaType(pizzaType))
 	}
 
 	return (
@@ -55,7 +53,7 @@ export const PizzaFilter: FC = (): JSX.Element => {
 					<li key={pizzaType.value}>
 						<Button
 							className={classNames(classes.buttonPizzaType, {
-								[classes.buttonPizzaType_active]: storePizzaType === pizzaType.value
+								//[classes.buttonPizzaType_active]: storePizzaType === pizzaType.value
 							})}
 							onClick={() => selectPizzaTypeHandler(pizzaType.value)}
 						>
