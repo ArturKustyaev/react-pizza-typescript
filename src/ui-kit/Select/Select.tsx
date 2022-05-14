@@ -3,14 +3,14 @@ import { FC, HTMLAttributes, KeyboardEvent, memo, useState } from 'react'
 import Icon from 'ui-kit/Icon'
 import classes from './Select.module.scss'
 
-export type FilterValueType = 'famous' | 'price' | 'alphabet'
+export type SortValueType = 'famous' | 'price' | 'title'
 
-interface IFilterItem {
+interface ISortItem {
 	text: string
-	value: FilterValueType
+	value: SortValueType
 }
 
-export const orderFields: Array<IFilterItem> = [
+export const orderFields: Array<ISortItem> = [
 	{
 		text: 'популярности',
 		value: 'famous'
@@ -21,17 +21,17 @@ export const orderFields: Array<IFilterItem> = [
 	},
 	{
 		text: 'алфавиту',
-		value: 'alphabet'
+		value: 'title'
 	}
 ]
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
 	className?: string
 	tabIndex?: number
-	items?: Array<IFilterItem>
+	items?: Array<ISortItem>
 	placeholder?: string
 	defaultItemChecked?: number
-	onSelectItem: (value: FilterValueType) => void
+	onSelectItem: (value: SortValueType) => void
 }
 
 export const Select: FC<Props> = memo(

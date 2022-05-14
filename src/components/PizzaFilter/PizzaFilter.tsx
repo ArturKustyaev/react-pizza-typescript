@@ -1,9 +1,11 @@
 import classNames from 'classnames'
+import { useAppSelector } from 'hooks'
 import { PizzaType } from 'models'
-import { FC, useCallback } from 'react'
+import { FC } from 'react'
 import { useDispatch } from 'react-redux'
+import { setFilter, setSort } from 'store/reducers'
 import { Button, Select } from 'ui-kit'
-import { FilterValueType } from 'ui-kit/Select/Select'
+import { SortValueType } from 'ui-kit/Select/Select'
 import classes from './PizzaFilter.module.scss'
 
 interface IPizzaType {
@@ -35,29 +37,29 @@ const pizzaTypes: IPizzaType[] = [
 ]
 
 export const PizzaFilter: FC = (): JSX.Element => {
-	//const { pizzaType: storePizzaType } = useSelector((state: AppStateType) => state.pizzas)
+	const { pizzaType } = useAppSelector(state => state.filter)
 	const dispatch = useDispatch()
 
-	const onSelect = useCallback((selectedField: FilterValueType) => {
-		console.log(selectedField)
-	}, [])
+	const onSelect = (selectedField: SortValueType) => {
+		dispatch(setSort(selectedField))
+	}
 
-	const selectPizzaTypeHandler = (pizzaType: PizzaType) => {
-		//	dispatch(setPizzaType(pizzaType))
+	const setPizzaTypeHandler = (pizzaType: PizzaType) => {
+		dispatch(setFilter(pizzaType))
 	}
 
 	return (
 		<div className={classes.nav}>
 			<ul className={classes.filter}>
-				{pizzaTypes.map(pizzaType => (
-					<li key={pizzaType.value}>
+				{pizzaTypes.map(type => (
+					<li key={type.value}>
 						<Button
 							className={classNames(classes.buttonPizzaType, {
-								//[classes.buttonPizzaType_active]: storePizzaType === pizzaType.value
+								[classes.buttonPizzaType_active]: pizzaType === type.value
 							})}
-							onClick={() => selectPizzaTypeHandler(pizzaType.value)}
+							onClick={() => setPizzaTypeHandler(type.value)}
 						>
-							{pizzaType.text}
+							{type.text}
 						</Button>
 					</li>
 				))}

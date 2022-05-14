@@ -7,7 +7,8 @@
 			"availableDough": ["тонкое", "традиционное"],
 			"aviableSizes": [26, 35, 40],
 			"type": "grill",
-			"price": 395
+			"price": 395,
+			"rating": 7
 		},
 		{
 			"id": 2,
@@ -16,7 +17,8 @@
 			"availableDough": ["тонкое", "традиционное"],
 			"aviableSizes": [26, 40],
 			"type": "meat",
-			"price": 415
+			"price": 415,
+			"rating": 5
 		},
 		{
 			"id": 3,
@@ -24,8 +26,9 @@
 			"img": "https://dodopizza-a.akamaihd.net/static/Img/Products/aa845b6e841241fbbff1a770b3ad3103_584x584.jpeg",
 			"availableDough": ["тонкое"],
 			"aviableSizes": [26, 35, 40],
-			"type": "spicy",
-			"price": 350
+			"type": "mushroom",
+			"price": 350,
+			"rating": 4
 		},
 		{
 			"id": 4,
@@ -34,7 +37,8 @@
 			"availableDough": ["тонкое", "традиционное"],
 			"aviableSizes": [25, 30, 40],
 			"type": "spicy",
-			"price": 750
+			"price": 750,
+			"rating": 8
 		},
 
 		{
@@ -44,34 +48,28 @@
 			"availableDough": ["тонкое", "традиционное"],
 			"aviableSizes": [25, 30, 40],
 			"type": "meat",
-			"price": 940
+			"price": 940,
+			"rating": 7
 		},
 		{
 			"id": 6,
-			"title": "Ветчина и грибы",
-			"img": "https://dodopizza-a.akamaihd.net/static/Img/Products/aa845b6e841241fbbff1a770b3ad3103_584x584.jpeg",
-			"availableDough": ["тонкое", "традиционное"],
-			"aviableSizes": [25, 30, 40],
-			"type": "mushroom",
-			"price": 750
-		},
-		{
-			"id": 7,
 			"title": "Овощная",
 			"img": "https://dodopizza-a.akamaihd.net/static/Img/Products/3a9785bc5ac145118403de7d22b70fd9_584x584.jpeg",
 			"availableDough": ["тонкое", "традиционное"],
 			"aviableSizes": [25, 30, 40],
-			"type": "mushroom",
-			"price": 500
+			"type": "vegan",
+			"price": 500,
+			"rating": 6
 		},
 		{
-			"id": 8,
+			"id": 7,
 			"title": "Супер мясная",
 			"img": "https://dodopizza-a.akamaihd.net/static/Img/Products/5b5d246f1d154bd39f606d1d72899a27_584x584.jpeg",
 			"availableDough": ["тонкое", "традиционное"],
 			"aviableSizes": [25, 30, 40],
 			"type": "meat",
-			"price": 500
+			"price": 500,
+			"rating": 9
 		}
 	]
 }

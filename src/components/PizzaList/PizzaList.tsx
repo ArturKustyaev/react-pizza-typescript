@@ -2,30 +2,23 @@ import PizzaCard from 'components/PizzaCard'
 import { useAppDispatch, useAppSelector } from 'hooks'
 import { ICartPizza } from 'models'
 import { FC, useEffect } from 'react'
-import { createSearchParams, useNavigate } from 'react-router-dom'
 import { addPizzaToCart } from 'store/reducers'
 import { fetchPizzas } from 'store/reducers/pizzasReducer'
 import classes from './PizzaList.module.scss'
 
 export const PizzaList: FC = (): JSX.Element => {
-	const { pizzas, pizzaType } = useAppSelector(state => state.pizzas)
-	const dispatch = useAppDispatch()
+	const { pizzas } = useAppSelector(state => state.pizzas)
+	const { pizzaType, sort } = useAppSelector(state => state.filter)
 
-	const navigate = useNavigate()
+	const dispatch = useAppDispatch()
 
 	const onAddPizzaToCart = (pizza: ICartPizza) => {
 		dispatch(addPizzaToCart(pizza))
 	}
 
 	useEffect(() => {
-		dispatch(fetchPizzas())
-
-		navigate({
-			search: `?${createSearchParams({
-				pizza_type: pizzaType
-			})}`
-		})
-	}, [pizzaType])
+		dispatch(fetchPizzas({ pizzaType, sort }))
+	}, [pizzaType, sort])
 
 	return (
 		<div className={classes.pizzas}>

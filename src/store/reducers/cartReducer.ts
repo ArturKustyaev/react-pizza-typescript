@@ -2,11 +2,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { ICartPizza } from 'models'
 
 interface IInitialState {
-	cartPizzas: { [key: string]: ICartPizza[] }
+	pizzas: { [key: string]: ICartPizza[] }
 }
 
 const initialState: IInitialState = {
-	cartPizzas: {}
+	pizzas: {}
 }
 
 const cartSlice = createSlice({
@@ -14,27 +14,63 @@ const cartSlice = createSlice({
 	initialState,
 	reducers: {
 		addPizzaToCart(state, action: PayloadAction<ICartPizza>) {
-			if (!state.cartPizzas[action.payload.id]) {
-				state.cartPizzas[action.payload.id] = []
+			if (!state.pizzas[action.payload.id]) {
+				state.pizzas[action.payload.id] = []
 			}
 
-			const addedPizzaIndex = state.cartPizzas[action.payload.id].findIndex(
+			const addedPizzaIndex = state.pizzas[action.payload.id].findIndex(
 				pizza => pizza.dough === action.payload.dough && pizza.size === action.payload.size
 			)
 
-			addedPizzaIndex != -1
-				? (state.cartPizzas[action.payload.id][addedPizzaIndex].count += 1)
-				: state.cartPizzas[action.payload.id].push(action.payload)
+			addedPizzaIndex !== -1
+				? (state.pizzas[action.payload.id][addedPizzaIndex].count += 1)
+				: state.pizzas[action.payload.id].push(action.payload)
 		},
-		deletePizzaFromCart(state, action: PayloadAction<number>) {
-			//state.cartPizzas = state.cartPizzas[action.payload]
+		incrementPizzaCounter(state, action: PayloadAction<ICartPizza>) {
+			state.pizzas[action.payload.id].map(pizza =>
+				pizza.dough === action.payload.dough && pizza.size === action.payload.size
+					? (pizza.count += 1)
+					: pizza
+			)
 		},
-		deleteAllPizzasFromCart(state) {
-			state.cartPizzas = {}
+		decrementPizzaCounter(state, action: PayloadAction<ICartPizza>) {
+			const id = action.payload.id
+
+			state.pizzas[id].map(pizza =>
+				pizza.dough === action.payload.dough && pizza.size === action.payload.size
+					? (pizza.count -= 1)
+					: pizza
+			)
+
+			state.pizzas[id] = state.pizzas[id].filter(pizza => pizza.count !== 0)
+
+			if (state.pizzas[id].length === 0) {
+				delete state.pizzas[id]
+			}
+		},
+		deletePizzaFromCart(state, action: PayloadAction<ICartPizza>) {
+			const id = action.payload.id
+
+			state.pizzas[id] = state.pizzas[id].filter(
+				pizza => pizza.dough !== action.payload.dough || pizza.size !== action.payload.size
+			)
+
+			if (state.pizzas[id].length === 0) {
+				delete state.pizzas[id]
+			}
+		},
+		clearCart(state) {
+			state.pizzas = {}
 		}
 	}
 })
 
-export const { addPizzaToCart, deletePizzaFromCart, deleteAllPizzasFromCart } = cartSlice.actions
+export const {
+	addPizzaToCart,
+	incrementPizzaCounter,
+	decrementPizzaCounter,
+	deletePizzaFromCart,
+	clearCart
+} = cartSlice.actions
 
 export default cartSlice.reducer

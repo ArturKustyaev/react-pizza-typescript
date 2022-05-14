@@ -1,19 +1,31 @@
-import { useAppDispatch } from 'hooks'
 import { ICartPizza } from 'models'
 import { FC } from 'react'
-import { AppDispatch } from 'store'
-import { deletePizzaFromCart } from 'store/reducers'
 import { CircleButton } from 'ui-kit'
 import classes from './CartItem.module.scss'
 
 interface Props {
 	pizza: ICartPizza
-	onDeletePizzaFromCart: (id: number) => void
+	onIncrementCounter: (pizza: ICartPizza) => void
+	onDecrementCounter: (pizza: ICartPizza) => void
+	onDeletePizzaFromCart: (pizza: ICartPizza) => void
 }
 
-export const CartItem: FC<Props> = ({ pizza, onDeletePizzaFromCart }): JSX.Element => {
+export const CartItem: FC<Props> = ({
+	pizza,
+	onIncrementCounter,
+	onDecrementCounter,
+	onDeletePizzaFromCart
+}): JSX.Element => {
+	const incrementCounterHandler = () => {
+		onIncrementCounter(pizza)
+	}
+
+	const decrementCounterHandler = () => {
+		onDecrementCounter(pizza)
+	}
+
 	const deletePizzaHandler = () => {
-		onDeletePizzaFromCart(pizza.id)
+		onDeletePizzaFromCart(pizza)
 	}
 
 	return (
@@ -24,11 +36,11 @@ export const CartItem: FC<Props> = ({ pizza, onDeletePizzaFromCart }): JSX.Eleme
 				<p className={classes.params}> {`${pizza.dough} тесто, ${pizza.size} см.`}</p>
 			</div>
 			<div className={classes.countBlock}>
-				<CircleButton type='minus' />
+				<CircleButton type='minus' onClick={decrementCounterHandler} />
 				<span className={classes.count}>{pizza.count}</span>
-				<CircleButton type='plus' />
+				<CircleButton type='plus' onClick={incrementCounterHandler} />
 			</div>
-			<p className={classes.price}>{`${pizza.price} ₽`}</p>
+			<p className={classes.price}>{`${pizza.price * pizza.count} ₽`}</p>
 			<CircleButton className={classes.buttonDelete} type='delete' onClick={deletePizzaHandler} />
 		</div>
 	)

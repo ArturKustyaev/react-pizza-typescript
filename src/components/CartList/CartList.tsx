@@ -3,7 +3,12 @@ import { useAppDispatch, useAppSelector } from 'hooks'
 import { ICartPizza } from 'models'
 import { FC } from 'react'
 import { getPizzasCount, getTotalPrice } from 'selectors'
-import { deleteAllPizzasFromCart, deletePizzaFromCart } from 'store/reducers'
+import {
+	clearCart,
+	decrementPizzaCounter,
+	deletePizzaFromCart,
+	incrementPizzaCounter
+} from 'store/reducers'
 import { Button, Icon } from 'ui-kit'
 import classes from './CartList.module.scss'
 
@@ -12,15 +17,23 @@ interface Props {
 }
 
 export const CartList: FC<Props> = ({ pizzas }): JSX.Element => {
-	const { cartPizzas } = useAppSelector(state => state.cart)
+	const { pizzas: cartPizzas } = useAppSelector(state => state.cart)
 	const dispatch = useAppDispatch()
 
-	const onDeletePizzaFromCart = (id: number) => {
-		dispatch(deletePizzaFromCart(id))
+	const onIncrementCounter = (pizza: ICartPizza) => {
+		dispatch(incrementPizzaCounter(pizza))
+	}
+
+	const onDecrementCounter = (pizza: ICartPizza) => {
+		dispatch(decrementPizzaCounter(pizza))
+	}
+
+	const onDeletePizzaFromCart = (pizza: ICartPizza) => {
+		dispatch(deletePizzaFromCart(pizza))
 	}
 
 	const deleteAllPizzasHandler = () => {
-		dispatch(deleteAllPizzasFromCart())
+		dispatch(clearCart())
 	}
 
 	return (
@@ -39,7 +52,12 @@ export const CartList: FC<Props> = ({ pizzas }): JSX.Element => {
 				{Object.keys(pizzas).map(pizzaId =>
 					pizzas[pizzaId].map(pizza => (
 						<li key={pizza.dough + pizza.size}>
-							<CartItem pizza={pizza} onDeletePizzaFromCart={onDeletePizzaFromCart} />
+							<CartItem
+								pizza={pizza}
+								onIncrementCounter={onIncrementCounter}
+								onDecrementCounter={onDecrementCounter}
+								onDeletePizzaFromCart={onDeletePizzaFromCart}
+							/>
 						</li>
 					))
 				)}

@@ -1,3 +1,4 @@
+import { SortValueType } from './../../ui-kit/Select/Select'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { pizzasApi } from 'api'
 import { IPizza, PizzaType } from 'models'
@@ -6,27 +7,26 @@ interface IInitialState {
 	pizzas: IPizza[]
 	error: string | null
 	isFetching: boolean
-	pizzaType: PizzaType
 }
 
 const initialState: IInitialState = {
 	pizzas: [],
 	error: null,
-	isFetching: false,
-	pizzaType: 'all'
+	isFetching: false
 }
 
-const fetchPizzas = createAsyncThunk<IPizza[], undefined, { rejectValue: string }>(
-	'pizzas/fetchPizzas',
-	async (_, { rejectWithValue }) => {
-		try {
-			const response = await pizzasApi.fetchPizzas()
-			return response.data
-		} catch (e) {
-			return rejectWithValue('Ошибка при загрузке пицц!')
-		}
+const fetchPizzas = createAsyncThunk<
+	IPizza[],
+	{ pizzaType: PizzaType; sort: SortValueType },
+	{ rejectValue: string }
+>('pizzas/fetchPizzas', async ({ pizzaType, sort }, { rejectWithValue }) => {
+	try {
+		const response = await pizzasApi.fetchPizzas(pizzaType, sort)
+		return response.data
+	} catch (e) {
+		return rejectWithValue('Ошибка при загрузке пицц!')
 	}
-)
+})
 
 const pizzasSlice = createSlice({
 	name: 'pizzas',
