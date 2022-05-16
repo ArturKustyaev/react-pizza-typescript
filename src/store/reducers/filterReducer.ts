@@ -9,7 +9,7 @@ interface IInitialState {
 
 const initialState: IInitialState = {
 	pizzaType: 'all',
-	sort: 'price'
+	sort: 'famous'
 }
 
 const cartSlice = createSlice({

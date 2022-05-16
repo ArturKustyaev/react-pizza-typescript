@@ -36,9 +36,17 @@ export const CartItem: FC<Props> = ({
 				<p className={classes.params}> {`${pizza.dough} тесто, ${pizza.size} см.`}</p>
 			</div>
 			<div className={classes.countBlock}>
-				<CircleButton type='minus' onClick={decrementCounterHandler} />
+				<CircleButton
+					className={classes.buttonCount}
+					type='minus'
+					onClick={decrementCounterHandler}
+				/>
 				<span className={classes.count}>{pizza.count}</span>
-				<CircleButton type='plus' onClick={incrementCounterHandler} />
+				<CircleButton
+					className={classes.buttonCount}
+					type='plus'
+					onClick={incrementCounterHandler}
+				/>
 			</div>
 			<p className={classes.price}>{`${pizza.price * pizza.count} ₽`}</p>
 			<CircleButton className={classes.buttonDelete} type='delete' onClick={deletePizzaHandler} />

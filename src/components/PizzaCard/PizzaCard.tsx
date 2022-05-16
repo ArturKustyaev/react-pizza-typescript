@@ -1,10 +1,8 @@
 import classNames from 'classnames'
-import { count } from 'console'
-import { useAppDispatch } from 'hooks'
+import { useAppSelector } from 'hooks'
 import { ICartPizza, IPizza } from 'models'
 import { FC, HTMLAttributes, useState } from 'react'
-import { AppDispatch } from 'store'
-import { addPizzaToCart } from 'store/reducers/cartReducer'
+import getPizzaCountByParams from 'selectors/getPizzaCountByParams'
 import { Button } from 'ui-kit'
 import classes from './PizzaCard.module.scss'
 
@@ -18,10 +16,19 @@ type pizzaParamsType = {
 	dough: string
 	size: number
 }
+
 export const PizzaCard: FC<Props> = ({ className, pizza, onAddPizzaToCart }): JSX.Element => {
+	const { pizzas } = useAppSelector(state => state.cart)
+
 	const [pizzaParams, setPizzaParams] = useState<pizzaParamsType>({
 		dough: pizza.availableDough[0],
 		size: pizza.aviableSizes[0]
+	})
+
+	const addedPizzasCount = getPizzaCountByParams(pizzas, {
+		id: pizza.id,
+		size: pizzaParams.size,
+		dough: pizzaParams.dough
 	})
 
 	const setPizzaDoughtHandler = (dough: string) => {
@@ -80,7 +87,7 @@ export const PizzaCard: FC<Props> = ({ className, pizza, onAddPizzaToCart }): JS
 			</div>
 			<div className={classes.actions}>
 				<p className={classes.price}>{`от ${pizza.price} ₽`} </p>
-				<Button onClick={addPizzaInCartHandler}>Добавить</Button>
+				<Button onClick={addPizzaInCartHandler}>Добавить {addedPizzasCount}</Button>
 			</div>
 		</div>
 	)

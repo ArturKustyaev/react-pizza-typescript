@@ -35,7 +35,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-right: 90px;
+    max-width: 120px;
+    margin-right: 15px;
+    margin-left: 15px;
 }
 
 .count {
@@ -51,14 +53,29 @@
     font-weight: 700;
     line-height: 27px;
     margin-left: 45px;
-    margin-right: 45px;
+    margin-right: 15px;
+    max-width: 120px;
+    width: 100%;
+}
+
+.buttonCount {
+    &:hover,
+    &:hover::before,
+    &:hover::after {
+        border-color: darken(#FE5F1E, 10%);
+    }
 }
 
 .buttonDelete {
-    border-color: #D7D7D7;
-
+    &,
     &::before,
     &::after {
         border-color: #D7D7D7;
+    }
+
+    &:hover,
+    &:hover::before,
+    &:hover::after {
+        border-color: darken(#D7D7D7, 10%);
     }
 }

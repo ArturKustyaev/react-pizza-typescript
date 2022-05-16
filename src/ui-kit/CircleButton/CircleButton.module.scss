@@ -18,7 +18,11 @@
     height: 32px;
     position: relative;
     width: 32px;
-
+    
+    &:active{
+        margin-top: 2px;
+    }
+    
     &_minus {
         &::after {
             @include line;

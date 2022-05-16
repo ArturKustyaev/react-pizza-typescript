@@ -14,17 +14,19 @@ const cartSlice = createSlice({
 	initialState,
 	reducers: {
 		addPizzaToCart(state, action: PayloadAction<ICartPizza>) {
-			if (!state.pizzas[action.payload.id]) {
-				state.pizzas[action.payload.id] = []
+			const id = action.payload.id
+
+			if (!state.pizzas[id]) {
+				state.pizzas[id] = []
 			}
 
-			const addedPizzaIndex = state.pizzas[action.payload.id].findIndex(
+			const addedPizzaIndex = state.pizzas[id].findIndex(
 				pizza => pizza.dough === action.payload.dough && pizza.size === action.payload.size
 			)
 
 			addedPizzaIndex !== -1
-				? (state.pizzas[action.payload.id][addedPizzaIndex].count += 1)
-				: state.pizzas[action.payload.id].push(action.payload)
+				? (state.pizzas[id][addedPizzaIndex].count += 1)
+				: state.pizzas[id].push(action.payload)
 		},
 		incrementPizzaCounter(state, action: PayloadAction<ICartPizza>) {
 			state.pizzas[action.payload.id].map(pizza =>

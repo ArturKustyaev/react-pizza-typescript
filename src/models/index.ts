@@ -18,4 +18,10 @@ export interface ICartPizza {
 	count: number
 }
 
+export interface IFindPizzaParams {
+	id: number
+	dough: string
+	size: number
+}
+
 export type PizzaType = 'all' | 'meat' | 'vegan' | 'mushroom' | 'spicy'

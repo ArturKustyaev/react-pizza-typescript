@@ -6,5 +6,9 @@ interface Props {
 }
 
 export const Layout: FC<Props> = ({ children }): JSX.Element => {
-	return <div className={classes.layout}>{children}</div>
+	return (
+		<div className={classes.wrapper}>
+			<div className={classes.layout}>{children}</div>
+		</div>
+	)
 }
