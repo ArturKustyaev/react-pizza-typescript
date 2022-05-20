@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { FC, HTMLAttributes } from 'react'
+import { FC, HTMLAttributes, memo } from 'react'
 import classes from './CircleButton.module.scss'
 
 type CircleButtonType = 'minus' | 'plus' | 'delete'
@@ -9,7 +9,7 @@ interface Props extends HTMLAttributes<HTMLButtonElement> {
 	type: CircleButtonType
 }
 
-export const CircleButton: FC<Props> = ({ className, type, ...rest }): JSX.Element => {
+export const CircleButton: FC<Props> = memo(({ className, type, ...rest }): JSX.Element => {
 	const buttonClasses = classNames(
 		classes.button,
 		{
@@ -20,4 +20,4 @@ export const CircleButton: FC<Props> = ({ className, type, ...rest }): JSX.Eleme
 		className
 	)
 	return <button className={buttonClasses} {...rest} />
-}
+})

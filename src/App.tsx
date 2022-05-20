@@ -10,8 +10,8 @@ function App() {
 		<Provider store={store}>
 			<BrowserRouter>
 				<Routes>
-					<Route path='/' element={<Home />} />
-					<Route path='/cart' element={<Cart />} />
+					<Route path='/react-pizza-typescript' element={<Home />} />
+					<Route path='/react-pizza-typescript/cart' element={<Cart />} />
 				</Routes>
 			</BrowserRouter>
 		</Provider>

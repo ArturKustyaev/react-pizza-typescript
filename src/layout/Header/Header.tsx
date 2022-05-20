@@ -1,6 +1,6 @@
 import logo from 'assets/img/logo.png'
 import { CartButton } from 'components'
-import { FC } from 'react'
+import { FC, memo } from 'react'
 import { Link } from 'react-router-dom'
 import classes from './Header.module.scss'
 
@@ -8,10 +8,10 @@ interface Props {
 	isCartButtonHide?: boolean
 }
 
-export const Header: FC<Props> = ({ isCartButtonHide = false }): JSX.Element => {
+export const Header: FC<Props> = memo(({ isCartButtonHide = false }): JSX.Element => {
 	return (
 		<div className={classes.header}>
-			<Link className={classes.logo} to='/'>
+			<Link className={classes.logo} to='/react-pizza-typescript'>
 				<img className={classes.logoIcon} src={logo} alt='logo' />
 				<div>
 					<p className={classes.logoTitle}>REACT PIZZA</p>
@@ -22,4 +22,4 @@ export const Header: FC<Props> = ({ isCartButtonHide = false }): JSX.Element => 
 			{!isCartButtonHide && <CartButton />}
 		</div>
 	)
-}
+})

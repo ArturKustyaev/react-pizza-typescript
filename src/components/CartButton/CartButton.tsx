@@ -9,7 +9,7 @@ export const CartButton: FC = (): JSX.Element => {
 	const { pizzas: cartPizzas } = useAppSelector(state => state.cart)
 
 	return (
-		<Link to='/cart'>
+		<Link to='/react-pizza-typescript/cart'>
 			<Button className={classes.button}>
 				<span className={classes.price}>{`${getTotalPrice(cartPizzas)} ₽`}</span>
 				<span className={classes.count}>

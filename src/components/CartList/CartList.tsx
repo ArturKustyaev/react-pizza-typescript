@@ -1,7 +1,7 @@
 import CartItem from 'components/CartItem'
 import { useAppDispatch, useAppSelector } from 'hooks'
 import { ICartPizza } from 'models'
-import { FC } from 'react'
+import { FC, useCallback } from 'react'
 import { getPizzasCount, getTotalPrice } from 'selectors'
 import {
 	clearCart,
@@ -20,21 +20,21 @@ export const CartList: FC<Props> = ({ pizzas }): JSX.Element => {
 	const { pizzas: cartPizzas } = useAppSelector(state => state.cart)
 	const dispatch = useAppDispatch()
 
-	const onIncrementCounter = (pizza: ICartPizza) => {
+	const onIncrementCounter = useCallback((pizza: ICartPizza) => {
 		dispatch(incrementPizzaCounter(pizza))
-	}
+	}, [])
 
-	const onDecrementCounter = (pizza: ICartPizza) => {
+	const onDecrementCounter = useCallback((pizza: ICartPizza) => {
 		dispatch(decrementPizzaCounter(pizza))
-	}
+	}, [])
 
-	const onDeletePizzaFromCart = (pizza: ICartPizza) => {
+	const onDeletePizzaFromCart = useCallback((pizza: ICartPizza) => {
 		dispatch(deletePizzaFromCart(pizza))
-	}
+	}, [])
 
-	const deleteAllPizzasHandler = () => {
+	const deleteAllPizzasHandler = useCallback(() => {
 		dispatch(clearCart())
-	}
+	}, [])
 
 	return (
 		<div className={classes.root}>
@@ -73,7 +73,7 @@ export const CartList: FC<Props> = ({ pizzas }): JSX.Element => {
 				</span>
 			</div>
 			<div className={classes.actions}>
-				<Button className={classes.buttonBack} variant='outlined' to='/'>
+				<Button className={classes.buttonBack} variant='outlined' to='/react-pizza-typescript'>
 					<Icon className={classes.arrowIcon} type='arrow_back' /> Вернуться назад
 				</Button>
 				<Button className={classes.buttonPay}>Оплатить сейчас</Button>

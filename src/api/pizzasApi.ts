@@ -4,7 +4,7 @@ import { IPizza } from 'models'
 import axios, { AxiosResponse } from 'axios'
 
 const instance = axios.create({
-	baseURL: 'http://localhost:3001/'
+	baseURL: 'https://621fb9dece99a7de1946cf5f.mockapi.io/api/v1'
 })
 
 const pizzasApi = {
@@ -15,17 +15,17 @@ const pizzasApi = {
 		if (pizzaType === 'all') {
 			return instance.get('/pizzas', {
 				params: {
-					_sort: sort,
-					_order: sort === 'title' ? 'asc' : 'desc'
+					sortBy: sort,
+					order: sort === 'title' ? 'asc' : 'desc'
 				}
 			})
 		}
 
 		return instance.get('/pizzas', {
 			params: {
-				_sort: sort,
-				_order: sort === 'title' ? 'asc' : 'desc',
-				type: pizzaType
+				type: pizzaType,
+				sortBy: sort,
+				order: sort === 'title' ? 'asc' : 'desc'
 			}
 		})
 	}

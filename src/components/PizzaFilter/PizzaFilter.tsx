@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { useAppSelector } from 'hooks'
 import { PizzaType } from 'models'
-import { FC } from 'react'
+import { FC, MouseEvent, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { setFilter, setSort } from 'store/reducers'
 import { Button, Select } from 'ui-kit'
@@ -40,13 +40,13 @@ export const PizzaFilter: FC = (): JSX.Element => {
 	const { pizzaType } = useAppSelector(state => state.filter)
 	const dispatch = useDispatch()
 
-	const onSelect = (selectedField: SortValueType) => {
+	const onSelect = useCallback((selectedField: SortValueType) => {
 		dispatch(setSort(selectedField))
-	}
+	}, [])
 
-	const setPizzaTypeHandler = (pizzaType: PizzaType) => {
+	const setPizzaTypeHandler = useCallback((pizzaType: PizzaType) => {
 		dispatch(setFilter(pizzaType))
-	}
+	},[])
 
 	return (
 		<div className={classes.nav}>

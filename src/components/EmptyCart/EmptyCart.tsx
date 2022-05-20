@@ -11,7 +11,7 @@ export const EmptyCart: FC = (): JSX.Element => {
 				главную страницу.
 			</p>
 			<Icon className={classes.icon} type='empty_cart' />
-			<Button className={classes.button} color='black' to='/' >
+			<Button className={classes.button} color='black' to='/react-pizza-typescript'>
 				Вернуться назад
 			</Button>
 		</div>

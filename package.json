@@ -2,6 +2,7 @@
   "name": "react-pizza",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://arturkustyaev.github.io/react-pizza-typescript",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.1",
     "@testing-library/jest-dom": "^5.16.4",
@@ -13,6 +14,7 @@
     "@types/react-dom": "^18.0.2",
     "axios": "^0.27.2",
     "classnames": "^2.3.1",
+    "gh-pages": "^4.0.0",
     "jest": "^28.1.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
@@ -30,7 +32,9 @@
     "dev": "npm run start && npm run server",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build",
+    "predeploy": "npm run build"
   },
   "eslintConfig": {
     "extends": [
@@ -51,7 +55,6 @@
     ]
   },
   "devDependencies": {
-    "json-server": "^0.17.0",
     "node-sass": "^7.0.1"
   }
 }

@@ -7,7 +7,7 @@ import { fetchPizzas } from 'store/reducers/pizzasReducer'
 import classes from './PizzaList.module.scss'
 
 export const PizzaList: FC = (): JSX.Element => {
-	const { pizzas, isFetching, error } = useAppSelector(state => state.pizzas)
+	const { pizzas, error } = useAppSelector(state => state.pizzas)
 	const { pizzaType, sort } = useAppSelector(state => state.filter)
 
 	const dispatch = useAppDispatch()
@@ -23,9 +23,8 @@ export const PizzaList: FC = (): JSX.Element => {
 	return (
 		<div className={classes.pizzas}>
 			<h1 className={classes.title}>
-				{isFetching && 'Загрузка пицц'}
 				{error && error}
-				{!isFetching && !error && 'Все пиццы'}
+				{!error && 'Все пиццы'}
 			</h1>
 			<div className={classes.pizzaList}>
 				{/* //{[0,0,0,0].map(item =>)} */}
