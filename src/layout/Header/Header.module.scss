@@ -14,6 +14,10 @@
 
     &Icon {
         margin-right: 17px;
+
+        @media (max-width: 576px) {
+            margin-right: 10px;
+        }
     }
 
     &Title {
@@ -23,6 +27,12 @@
         font-weight: 800;
         line-height: 29px;
         text-transform: uppercase;
+
+        @media (max-width: 576px) {
+            font-size: 20px;
+            max-width: 80px;
+            line-height: 20px;
+        }
     }
 
     &Subtitle {
@@ -31,5 +41,9 @@
         font-size: 16px;
         font-weight: 400;
         line-height: 19px;
+
+        @media (max-width: 576px) {
+            display: none;
+        }
     }
 }

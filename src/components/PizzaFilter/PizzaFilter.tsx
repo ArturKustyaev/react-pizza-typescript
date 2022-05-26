@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { useAppSelector } from 'hooks'
 import { PizzaType } from 'models'
-import { FC, MouseEvent, useCallback } from 'react'
+import { FC, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { setFilter, setSort } from 'store/reducers'
 import { Button, Select } from 'ui-kit'

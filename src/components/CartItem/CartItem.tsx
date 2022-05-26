@@ -26,25 +26,29 @@ export const CartItem: FC<Props> = memo(
 
 		return (
 			<div className={classes.cartItem}>
-				<img className={classes.img} src={pizza.img} alt={`Пицца: ${pizza.title}`} />
-				<div className={classes.info}>
-					<p className={classes.title}>{pizza.title}</p>
-					<p className={classes.params}> {`${pizza.dough} тесто, ${pizza.size} см.`}</p>
+				<div className={classes.pizzaInfo}>
+					<img className={classes.img} src={pizza.img} alt={`Пицца: ${pizza.title}`} />
+					<div className={classes.info}>
+						<p className={classes.title}>{pizza.title}</p>
+						<p className={classes.params}> {`${pizza.dough} тесто, ${pizza.size} см.`}</p>
+					</div>
 				</div>
-				<div className={classes.countBlock}>
-					<CircleButton
-						className={classes.buttonCount}
-						type='minus'
-						onClick={decrementCounterHandler}
-					/>
-					<span className={classes.count}>{pizza.count}</span>
-					<CircleButton
-						className={classes.buttonCount}
-						type='plus'
-						onClick={incrementCounterHandler}
-					/>
+				<div className={classes.priceInfo}>
+					<div className={classes.countBlock}>
+						<CircleButton
+							className={classes.buttonCount}
+							type='minus'
+							onClick={decrementCounterHandler}
+						/>
+						<span className={classes.count}>{pizza.count}</span>
+						<CircleButton
+							className={classes.buttonCount}
+							type='plus'
+							onClick={incrementCounterHandler}
+						/>
+					</div>
+					<p className={classes.price}>{`${pizza.price * pizza.count} ₽`}</p>
 				</div>
-				<p className={classes.price}>{`${pizza.price * pizza.count} ₽`}</p>
 				<CircleButton className={classes.buttonDelete} type='delete' onClick={deletePizzaHandler} />
 			</div>
 		)

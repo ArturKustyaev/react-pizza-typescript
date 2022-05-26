@@ -18,6 +18,7 @@
     height: 32px;
     position: relative;
     width: 32px;
+    flex-shrink: 0;
     
     &:active{
         margin-top: 2px;

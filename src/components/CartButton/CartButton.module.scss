@@ -2,17 +2,28 @@
     font-size: 16px;
     padding-left: 24px;
     padding-right: 24px;
+
+    @media (max-width: 576px) {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
 }
 
 .cartIcon {
     margin-right: 8px;
     position: relative;
     top: 2px;
+
+
 }
 
 .price {
     padding-right: 13px;
     position: relative;
+
+    @media (max-width: 576px) {
+        padding-right: 8px;
+    }
 
     &::after {
         background-color: rgba(255, 255, 255, 0.25);
@@ -28,4 +39,8 @@
 
 .count {
     padding-left: 13px;
+
+    @media (max-width: 576px) {
+        padding-left: 8px;
+    }
 }
