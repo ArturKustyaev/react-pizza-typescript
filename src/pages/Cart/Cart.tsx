@@ -5,13 +5,13 @@ import { Header } from 'layout'
 import { FC } from 'react'
 
 export const Cart: FC = (): JSX.Element => {
-	const { pizzas } = useAppSelector(state => state.cart)
+	const { items: pizzas } = useAppSelector(state => state.cart)
 
 	return (
 		<Layout>
 			<Container>
 				<Header isCartButtonHide={true} />
-				{Object.keys(pizzas).length ? <CartList pizzas={pizzas} /> : <EmpryCart />}
+				{pizzas.length ? <CartList pizzas={pizzas} /> : <EmpryCart />}
 			</Container>
 		</Layout>
 	)

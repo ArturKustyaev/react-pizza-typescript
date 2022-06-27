@@ -5,6 +5,7 @@ import axios, { AxiosResponse } from 'axios'
 
 const instance = axios.create({
 	baseURL: 'https://621fb9dece99a7de1946cf5f.mockapi.io/api/v1'
+	//baseURL: 'http://localhost:3001'
 })
 
 const pizzasApi = {

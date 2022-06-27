@@ -1,7 +1,8 @@
+import { useWhyDidYouUpdate } from 'ahooks'
 import classNames from 'classnames'
 import { useAppSelector } from 'hooks'
 import { ICartPizza, IPizza } from 'models'
-import { FC, HTMLAttributes, useState } from 'react'
+import { FC, HTMLAttributes, useCallback, useState } from 'react'
 import getPizzaCountByParams from 'selectors/getPizzaCountByParams'
 import { Button } from 'ui-kit'
 import classes from './PizzaCard.module.scss'
@@ -12,17 +13,19 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 	onAddPizzaToCart: (pizza: ICartPizza) => void
 }
 
-type pizzaParamsType = {
+type PizzaParamsType = {
 	dough: string
 	size: number
+	price: number
 }
 
 export const PizzaCard: FC<Props> = ({ className, pizza, onAddPizzaToCart }): JSX.Element => {
-	const { pizzas } = useAppSelector(state => state.cart)
+	const { items: pizzas } = useAppSelector(state => state.cart)
 
-	const [pizzaParams, setPizzaParams] = useState<pizzaParamsType>({
+	const [pizzaParams, setPizzaParams] = useState<PizzaParamsType>({
 		dough: pizza.availableDough[0],
-		size: pizza.aviableSizes[0]
+		size: pizza.aviableSizes[0],
+		price: pizza.price[pizza.aviableSizes[0]][0]
 	})
 
 	const addedPizzasCount = getPizzaCountByParams(pizzas, {
@@ -32,11 +35,25 @@ export const PizzaCard: FC<Props> = ({ className, pizza, onAddPizzaToCart }): JS
 	})
 
 	const setPizzaDoughtHandler = (dough: string) => {
-		setPizzaParams({ ...pizzaParams, dough: dough })
+		setPizzaParams({
+			...pizzaParams,
+			dough,
+			price:
+				pizza.price[pizzaParams.size][
+					pizza.availableDough.findIndex(aviableDough => dough === aviableDough)
+				]
+		})
 	}
 
 	const setPizzaSizeHandler = (size: number) => {
-		setPizzaParams({ ...pizzaParams, size: size })
+		setPizzaParams({
+			...pizzaParams,
+			size,
+			price:
+				pizza.price[size][
+					pizza.availableDough.findIndex(aviableDough => pizzaParams.dough === aviableDough)
+				]
+		})
 	}
 
 	const addPizzaInCartHandler = () => {
@@ -44,10 +61,10 @@ export const PizzaCard: FC<Props> = ({ className, pizza, onAddPizzaToCart }): JS
 			id: pizza.id,
 			title: pizza.title,
 			img: pizza.img,
+			count: 1,
 			dough: pizzaParams.dough,
 			size: pizzaParams.size,
-			price: pizza.price,
-			count: 1
+			price: pizzaParams.price
 		}
 
 		onAddPizzaToCart(cartPizza)
@@ -86,8 +103,10 @@ export const PizzaCard: FC<Props> = ({ className, pizza, onAddPizzaToCart }): JS
 				</div>
 			</div>
 			<div className={classes.actions}>
-				<p className={classes.price}>{`от ${pizza.price} ₽`} </p>
-				<Button onClick={addPizzaInCartHandler}>Добавить {addedPizzasCount}</Button>
+				<p className={classes.price}>{`${pizzaParams.price} ₽`} </p>
+				<Button onClick={addPizzaInCartHandler}>
+					Добавить {addedPizzasCount !== 0 && addedPizzasCount}
+				</Button>
 			</div>
 		</div>
 	)

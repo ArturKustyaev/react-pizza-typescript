@@ -6,7 +6,7 @@ import { Button, Icon } from 'ui-kit'
 import classes from './CartButton.module.scss'
 
 export const CartButton: FC = (): JSX.Element => {
-	const { pizzas: cartPizzas } = useAppSelector(state => state.cart)
+	const { items: cartPizzas } = useAppSelector(state => state.cart)
 
 	return (
 		<Link to='/react-pizza-typescript/cart'>

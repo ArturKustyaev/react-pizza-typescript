@@ -1,5 +1,5 @@
-import getPizzasCount from './getAllPizzaCount'
+import getPizzasCount from './getPizzaCount'
 import getTotalPrice from './getTotalPrice'
+import getPizzaCountByParams from './getPizzaCountByParams'
 
-export { getPizzasCount, getTotalPrice }
-
+export { getPizzasCount, getPizzaCountByParams, getTotalPrice }

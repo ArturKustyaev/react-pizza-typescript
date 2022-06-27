@@ -1,14 +1,12 @@
-import { ICartPizza, IFindPizzaParams } from 'models'
+import { ICartItem, IFindPizzaParams } from 'models'
 
-const getPizzaCountByParams = (
-	cartPizzas: { [key: string]: ICartPizza[] },
-	pizza: IFindPizzaParams
-) => {
-	const findPizza = cartPizzas[pizza.id]?.find(
-		cartPizza => cartPizza.dough === pizza.dough && cartPizza.size === pizza.size
+const getPizzaCountByParams = (cartItems: ICartItem[], pizza: IFindPizzaParams) => {
+	return (
+		cartItems
+			.find(cartItem => cartItem.id === pizza.id)
+			?.variants.find(variant => variant.dough === pizza.dough && variant.size === pizza.size)
+			?.count || 0
 	)
-
-	return findPizza?.count || null
 }
 
 export default getPizzaCountByParams

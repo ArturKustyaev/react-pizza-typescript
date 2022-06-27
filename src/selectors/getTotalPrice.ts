@@ -1,11 +1,14 @@
-import { ICartPizza } from 'models'
+import { ICartItem } from 'models'
 
-const getTotalPrice = (cartPizzas: { [key: string]: ICartPizza[] }) => {
-	const allPizzas: ICartPizza[] = []
-
-	Object.keys(cartPizzas).map(pizzaId => allPizzas.push(...cartPizzas[pizzaId]))
-
-	return allPizzas.reduce((sum, pizza) => (sum += pizza.price * pizza.count), 0)
+const getTotalPrice = (cartItems: ICartItem[]) => {
+	return cartItems.reduce(
+		(sum, cartItem) =>
+			(sum += cartItem.variants.reduce(
+				(sum, variant) => (sum += variant.count * variant.price),
+				0
+			)),
+		0
+	)
 }
 
 export default getTotalPrice
