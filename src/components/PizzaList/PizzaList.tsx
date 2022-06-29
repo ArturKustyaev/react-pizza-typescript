@@ -1,18 +1,19 @@
 import PizzaCard from 'components/PizzaCard'
+import { PizzaCardSkeleton } from 'components'
 import { useAppDispatch, useAppSelector } from 'hooks'
-import { ICartPizza } from 'models'
+import { ICartItem } from 'models'
 import { FC, useEffect } from 'react'
 import { addPizzaToCart } from 'store/reducers'
-import { fetchPizzas } from 'store/reducers/pizzasReducer'
+import { fetchPizzas } from 'store/reducers/pizzasSlice'
 import classes from './PizzaList.module.scss'
 
 export const PizzaList: FC = (): JSX.Element => {
-	const { pizzas, error } = useAppSelector(state => state.pizzas)
+	const { pizzas, error, isFetching, isSuccesed } = useAppSelector(state => state.pizzas)
 	const { pizzaType, sort } = useAppSelector(state => state.filter)
 
 	const dispatch = useAppDispatch()
 
-	const onAddPizzaToCart = (pizza: ICartPizza) => {
+	const onAddPizzaToCart = (pizza: ICartItem) => {
 		dispatch(addPizzaToCart(pizza))
 	}
 
@@ -27,15 +28,19 @@ export const PizzaList: FC = (): JSX.Element => {
 				{!error && 'Все пиццы'}
 			</h1>
 			<div className={classes.pizzaList}>
-				{/* //{[0,0,0,0].map(item =>)} */}
-				{pizzas.map(pizza => (
-					<PizzaCard
-						className={classes.pizzaCard}
-						key={pizza.id}
-						pizza={pizza}
-						onAddPizzaToCart={onAddPizzaToCart}
-					/>
-				))}
+				{isFetching &&
+					[0, 0, 0, 0].map((_, index) => (
+						<PizzaCardSkeleton key={index} className={classes.pizzaCard} />
+					))}
+				{isSuccesed &&
+					pizzas.map(pizza => (
+						<PizzaCard
+							className={classes.pizzaCard}
+							key={pizza.id}
+							pizza={pizza}
+							onAddPizzaToCart={onAddPizzaToCart}
+						/>
+					))}
 			</div>
 		</div>
 	)

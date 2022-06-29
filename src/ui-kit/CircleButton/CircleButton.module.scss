@@ -5,7 +5,6 @@
     left: 50%;
     position: absolute;
     top: 50%;
-    transform: translate(-50%, -50%);
 }
 
 .button {
@@ -13,23 +12,50 @@
     border-radius: 50%;
     border: 2px solid #FE5F1E;
     cursor: pointer;
+    flex-shrink: 0;
     height: 32px;
     position: relative;
     width: 32px;
-    flex-shrink: 0;
-    
-    &:active{
-        margin-top: 2px;
+
+    &:active {
+        transform: translateY(1px);
     }
-    
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: default;
+
+        &:active {
+            transform: none;
+        }
+
+        &:hover {
+            border-color: #FE5F1E;
+        }
+
+        &:hover::after {
+            border-color: #FE5F1E;
+            background-color: #FE5F1E;
+        }
+    }
+
     &_minus {
         &::after {
             @include line;
             width: 9px;
+            background-color: #FE5F1E;
+            transform: translate(-50%, -50%);
         }
     }
 
     &_plus {
+
+        &::after,
+        &::before {
+            background-color: #FE5F1E;
+            transform: translate(-50%, -50%);
+        }
+
         &::before {
             @include line;
             height: 9px;
@@ -42,15 +68,19 @@
     }
 
     &_delete {
-        transform: rotate(45deg);
 
         &::before {
             @include line;
             height: 9px;
+            transform-origin: center;
+            transform: translate(-50%, -50%) rotate(-45deg);
+
         }
 
         &::after {
             @include line;
+            transform-origin: center;
+            transform: translate(-50%, -50%) rotate(-45deg);
             width: 9px;
         }
     }

@@ -8,28 +8,14 @@ export interface IPizza {
 	price: { [key: string]: number[] }
 }
 
-export interface ICartPizza {
-	id: number
-	title: string
-	img: string
-	count: number
-	dough: string
-	size: number
-	price: number
-}
-
 export interface ICartItem {
 	id: number
 	title: string
 	img: string
-	variants: ICartItemVariant[]
-}
-
-export interface ICartItemVariant {
+	count: number
 	dough: string
 	size: number
 	price: number
-	count: number
 }
 
 export interface IFindPizzaParams {

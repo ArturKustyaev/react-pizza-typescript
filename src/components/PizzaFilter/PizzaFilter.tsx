@@ -8,7 +8,7 @@ import { Button, Select } from 'ui-kit'
 import { SortValueType } from 'ui-kit/Select/Select'
 import classes from './PizzaFilter.module.scss'
 
-interface IPizzaType {
+export interface IPizzaType {
 	value: PizzaType
 	text: string
 }
@@ -44,9 +44,9 @@ export const PizzaFilter: FC = (): JSX.Element => {
 		dispatch(setSort(selectedField))
 	}, [])
 
-	const setPizzaTypeHandler = useCallback((pizzaType: PizzaType) => {
+	const setPizzaTypeHandler = (pizzaType: PizzaType) => {
 		dispatch(setFilter(pizzaType))
-	},[])
+	}
 
 	return (
 		<div className={classes.nav}>

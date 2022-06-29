@@ -1,21 +1,21 @@
-import cartReducer, {
+import {
 	addPizzaToCart,
+	cartSlice,
 	clearCart,
 	decrementPizzaCounter,
 	deletePizzaFromCart,
 	incrementPizzaCounter
-} from './cartReducer'
-import filterReducer, { setFilter, setSort } from './filterReducer'
-import pizzasReducer, { fetchPizzas } from './pizzasReducer'
+} from './cartSlice'
+import { filterSlice, setFilter, setSort } from './filterSLice'
+import { pizzasSlice } from './pizzasSlice'
 
-export { cartReducer, filterReducer, pizzasReducer }
+export { cartSlice, filterSlice, pizzasSlice }
 
 export {
 	addPizzaToCart,
 	incrementPizzaCounter,
 	decrementPizzaCounter,
 	deletePizzaFromCart,
-	fetchPizzas,
 	clearCart,
 	setFilter,
 	setSort

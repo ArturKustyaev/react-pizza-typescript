@@ -1,4 +1,4 @@
-import { SortValueType } from './../../ui-kit/Select/Select'
+import { SortValueType } from 'ui-kit/Select'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { PizzaType } from 'models'
 
@@ -12,7 +12,7 @@ const initialState: IInitialState = {
 	sort: 'famous'
 }
 
-const cartSlice = createSlice({
+const filterSlice = createSlice({
 	name: 'filter',
 	initialState,
 	reducers: {
@@ -25,6 +25,6 @@ const cartSlice = createSlice({
 	}
 })
 
-export const { setFilter, setSort } = cartSlice.actions
+export const { setFilter, setSort } = filterSlice.actions
 
-export default cartSlice.reducer
+export default filterSlice.reducer

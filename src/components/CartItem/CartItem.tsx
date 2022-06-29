@@ -1,29 +1,28 @@
-import { ICartPizza } from 'models'
-import { FC, memo, useCallback } from 'react'
+import { ICartItem } from 'models'
+import { FC, memo } from 'react'
 import { CircleButton } from 'ui-kit'
 import classes from './CartItem.module.scss'
 
 interface Props {
-	pizza: ICartPizza
-	onIncrementCounter: (pizza: ICartPizza) => void
-	onDecrementCounter: (pizza: ICartPizza) => void
-	onDeletePizzaFromCart: (pizza: ICartPizza) => void
+	pizza: ICartItem
+	onIncrementCounter: (pizza: ICartItem) => void
+	onDecrementCounter: (pizza: ICartItem) => void
+	onDeletePizzaFromCart: (pizza: ICartItem) => void
 }
 
 export const CartItem: FC<Props> = memo(
 	({ pizza, onIncrementCounter, onDecrementCounter, onDeletePizzaFromCart }): JSX.Element => {
-		const incrementCounterHandler = useCallback(() => {
+		const incrementCounterHandler = () => {
 			onIncrementCounter(pizza)
-		}, [])
+		}
 
-		const decrementCounterHandler = useCallback(() => {
+		const decrementCounterHandler = () => {
 			onDecrementCounter(pizza)
-		}, [])
+		}
 
-		const deletePizzaHandler = useCallback(() => {
+		const deletePizzaHandler = () => {
 			onDeletePizzaFromCart(pizza)
-		}, [])
-
+		}
 		return (
 			<div className={classes.cartItem}>
 				<div className={classes.pizzaInfo}>
@@ -38,6 +37,7 @@ export const CartItem: FC<Props> = memo(
 						<CircleButton
 							className={classes.buttonCount}
 							type='minus'
+							disabled={pizza.count === 1}
 							onClick={decrementCounterHandler}
 						/>
 						<span className={classes.count}>{pizza.count}</span>

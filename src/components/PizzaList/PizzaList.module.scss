@@ -50,15 +50,10 @@
     }
 
     @media (max-width: 576px) {
-        width: calc(10 * 100% / 12 - 30px);
+        width: calc(100% - 30px);   
 
         &:not(:last-child) {
             margin-bottom: 30px;
         }
     }
-    
-    @media (max-width: 375px) {
-        width: calc(100% - 30px);       
-    }
-
 }

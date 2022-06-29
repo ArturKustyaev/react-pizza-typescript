@@ -1,4 +1,4 @@
-import { Cart, Home } from 'pages'
+import { Cart, Home, NotFound404 } from 'pages'
 import React from 'react'
 import { Provider } from 'react-redux'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
@@ -12,6 +12,7 @@ function App() {
 				<Routes>
 					<Route path='/react-pizza-typescript' element={<Home />} />
 					<Route path='/react-pizza-typescript/cart' element={<Cart />} />
+					<Route path='*' element={<NotFound404 />} />
 				</Routes>
 			</BrowserRouter>
 		</Provider>

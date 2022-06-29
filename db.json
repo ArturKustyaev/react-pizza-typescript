@@ -60,8 +60,8 @@
 			"id": 5,
 			"title": "Ветчина и сыр",
 			"img": "https://dodopizza-a.akamaihd.net/static/Img/Products/5630c6ed3f394c7ba25e1ef79a67b7ee_584x584.jpeg",
-			"availableDough": ["тонкое", "традиционное"],
-			"aviableSizes": [25, 35, 40],
+			"availableDough": ["традиционное"],
+			"aviableSizes": [25, 35],
 			"type": "meat",
 			"price": {
 				"25": [350, 450],

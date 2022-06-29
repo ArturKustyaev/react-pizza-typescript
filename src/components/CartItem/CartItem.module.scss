@@ -14,7 +14,7 @@
 
 .pizzaInfo {
     align-items: center;
-    display: flex;    
+    display: flex;
     flex: 1 1 auto;
 
     @media (max-width: 576px) {
@@ -113,6 +113,7 @@
 }
 
 .buttonCount {
+
     &:hover,
     &:hover::before,
     &:hover::after {
@@ -125,6 +126,12 @@
     &::before,
     &::after {
         border-color: #D7D7D7;
+
+    }
+
+    &::before,
+    &::after {
+        background-color: #D7D7D7;
     }
 
     &:hover,

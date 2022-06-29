@@ -1,16 +1,15 @@
-import { useWhyDidYouUpdate } from 'ahooks'
 import classNames from 'classnames'
 import { useAppSelector } from 'hooks'
-import { ICartPizza, IPizza } from 'models'
-import { FC, HTMLAttributes, useCallback, useState } from 'react'
-import getPizzaCountByParams from 'selectors/getPizzaCountByParams'
+import { ICartItem, IPizza } from 'models'
+import { FC, HTMLAttributes, useState } from 'react'
+import { getPizzaCountByParams } from 'store/reducers/cartSlice/selectors'
 import { Button } from 'ui-kit'
 import classes from './PizzaCard.module.scss'
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
 	className?: string
 	pizza: IPizza
-	onAddPizzaToCart: (pizza: ICartPizza) => void
+	onAddPizzaToCart: (pizza: ICartItem) => void
 }
 
 type PizzaParamsType = {
@@ -20,19 +19,20 @@ type PizzaParamsType = {
 }
 
 export const PizzaCard: FC<Props> = ({ className, pizza, onAddPizzaToCart }): JSX.Element => {
-	const { items: pizzas } = useAppSelector(state => state.cart)
-
+	const [isLoading, setIsLoading] = useState<boolean>(true)
 	const [pizzaParams, setPizzaParams] = useState<PizzaParamsType>({
 		dough: pizza.availableDough[0],
 		size: pizza.aviableSizes[0],
 		price: pizza.price[pizza.aviableSizes[0]][0]
 	})
 
-	const addedPizzasCount = getPizzaCountByParams(pizzas, {
-		id: pizza.id,
-		size: pizzaParams.size,
-		dough: pizzaParams.dough
-	})
+	const totalPizzaCount = useAppSelector(
+		getPizzaCountByParams({
+			id: pizza.id,
+			size: pizzaParams.size,
+			dough: pizzaParams.dough
+		})
+	)
 
 	const setPizzaDoughtHandler = (dough: string) => {
 		setPizzaParams({
@@ -56,8 +56,8 @@ export const PizzaCard: FC<Props> = ({ className, pizza, onAddPizzaToCart }): JS
 		})
 	}
 
-	const addPizzaInCartHandler = () => {
-		const cartPizza: ICartPizza = {
+	const addPizzaToCartHandler = () => {
+		const cartPizza: ICartItem = {
 			id: pizza.id,
 			title: pizza.title,
 			img: pizza.img,
@@ -70,9 +70,21 @@ export const PizzaCard: FC<Props> = ({ className, pizza, onAddPizzaToCart }): JS
 		onAddPizzaToCart(cartPizza)
 	}
 
+	const onImageLoad = () => {
+		setIsLoading(false)
+	}
+
 	return (
 		<div className={classNames(classes.pizzaCard, className)}>
-			<img className={classes.img} src={pizza.img} alt={`Пицца: ${pizza.title}`} />
+			{isLoading && <div className={classes.img_skeleton}></div>}
+			<img
+				className={classNames(classes.img, {
+					[classes.img_hide]: isLoading
+				})}
+				src={pizza.img}
+				alt={`Пицца: ${pizza.title}`}
+				onLoad={onImageLoad}
+			/>
 			<p className={classes.title}>{pizza.title}</p>
 			<div className={classes.params}>
 				<div className={classes.dough}>
@@ -104,8 +116,8 @@ export const PizzaCard: FC<Props> = ({ className, pizza, onAddPizzaToCart }): JS
 			</div>
 			<div className={classes.actions}>
 				<p className={classes.price}>{`${pizzaParams.price} ₽`} </p>
-				<Button onClick={addPizzaInCartHandler}>
-					Добавить {addedPizzasCount !== 0 && addedPizzasCount}
+				<Button onClick={addPizzaToCartHandler}>
+					Добавить {totalPizzaCount !== 0 && totalPizzaCount}
 				</Button>
 			</div>
 		</div>

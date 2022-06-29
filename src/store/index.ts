@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { combineReducers } from 'redux'
-import { pizzasReducer, cartReducer, filterReducer } from './reducers'
+import { pizzasSlice, cartSlice, filterSlice } from './reducers'
 
 const store = configureStore({
 	reducer: combineReducers({
-		cart: cartReducer,
-		pizzas: pizzasReducer,
-		filter: filterReducer
+		cart: cartSlice,
+		pizzas: pizzasSlice,
+		filter: filterSlice
 	})
 })
 

@@ -1,39 +1,41 @@
+import { useWhyDidYouUpdate } from 'ahooks'
 import CartItem from 'components/CartItem'
 import { useAppDispatch, useAppSelector } from 'hooks'
-import { ICartPizza, ICartItem } from 'models'
+import { ICartItem } from 'models'
 import { FC, useCallback } from 'react'
-import { getPizzasCount, getTotalPrice } from 'selectors'
-import getPizzaCountByParams from 'selectors/getPizzaCountByParams'
 import {
 	clearCart,
 	decrementPizzaCounter,
 	deletePizzaFromCart,
 	incrementPizzaCounter
 } from 'store/reducers'
+import { getCartItemsTotalCount, getCartTotalPrice } from 'store/reducers/cartSlice/selectors'
 import { Button, Icon } from 'ui-kit'
 import classes from './CartList.module.scss'
 
 interface Props {
-	pizzas: ICartItem[]
+	items: ICartItem[]
 }
 
-export const CartList: FC<Props> = ({ pizzas }): JSX.Element => {
-	const { items: cartPizzas } = useAppSelector(state => state.cart)
+export const CartList: FC<Props> = ({ items }): JSX.Element => {
 	const dispatch = useAppDispatch()
 
-	const onIncrementCounter = useCallback((pizza: ICartPizza) => {
+	const totalPrice = useAppSelector(getCartTotalPrice)
+	const totalCount = useAppSelector(getCartItemsTotalCount)
+
+	const onIncrementCounter = useCallback((pizza: ICartItem) => {
 		dispatch(incrementPizzaCounter(pizza))
 	}, [])
 
-	const onDecrementCounter = useCallback((pizza: ICartPizza) => {
+	const onDecrementCounter = useCallback((pizza: ICartItem) => {
 		dispatch(decrementPizzaCounter(pizza))
 	}, [])
 
-	const onDeletePizzaFromCart = useCallback((pizza: ICartPizza) => {
+	const onDeletePizzaFromCart = useCallback((pizza: ICartItem) => {
 		dispatch(deletePizzaFromCart(pizza))
 	}, [])
 
-	const deleteAllPizzasHandler = useCallback(() => {
+	const clearCartHandler = useCallback(() => {
 		dispatch(clearCart())
 	}, [])
 
@@ -44,52 +46,39 @@ export const CartList: FC<Props> = ({ pizzas }): JSX.Element => {
 					<Icon className={classes.cartIcon} type='cart' />
 					Корзина
 				</h2>
-				<button className={classes.buttonTrash} onClick={deleteAllPizzasHandler}>
+				<button className={classes.buttonTrash} onClick={clearCartHandler}>
 					<Icon className={classes.trashIcon} type='trash' />
 					Очисить корзину
 				</button>
 			</div>
 			<ul className={classes.cartList}>
-				{pizzas.map(cartItem =>
-					cartItem.variants.map(variant => {
-						const cartPizza: ICartPizza = {
-							id: cartItem.id,
-							title: cartItem.title,
-							img: cartItem.img,
-							dough: variant.dough,
-							count: variant.count,
-							price: variant.price,
-							size: variant.size
-						}
-
-						return (
-							<li key={cartItem.id + variant.dough + variant.size}>
-								<CartItem
-									pizza={cartPizza}
-									onIncrementCounter={onIncrementCounter}
-									onDecrementCounter={onDecrementCounter}
-									onDeletePizzaFromCart={onDeletePizzaFromCart}
-								/>
-							</li>
-						)
-					})
-				)}
+				{items.map(cartItem => (
+					<li key={cartItem.id + cartItem.dough + cartItem.size}>
+						<CartItem
+							pizza={cartItem}
+							onIncrementCounter={onIncrementCounter}
+							onDecrementCounter={onDecrementCounter}
+							onDeletePizzaFromCart={onDeletePizzaFromCart}
+						/>
+					</li>
+				))}
 			</ul>
-			{/* <div className={classes.orderInfo}>
+			<div className={classes.orderInfo}>
 				<span>
 					Всего пицц:
-					<span className={classes.totalCount}>{`${getPizzasCount(cartPizzas)} шт.`}</span>
+					<span className={classes.totalCount}>{`${totalCount} шт.`}</span>
 				</span>
 				<span>
 					Сумма заказа:
-					<span className={classes.totalPrice}>{`${getTotalPrice(cartPizzas)} ₽`}</span>
+					<span className={classes.totalPrice}>{`${totalPrice} ₽`}</span>
 				</span>
-			</div> */}
+			</div>
 			<div className={classes.actions}>
 				<Button className={classes.buttonBack} variant='outlined' to='/react-pizza-typescript'>
-					<Icon className={classes.arrowIcon} type='arrow_back' /> Вернуться назад
+					<Icon className={classes.arrowIcon} type='arrow_back' />
+					Вернуться назад
 				</Button>
-				<Button className={classes.buttonPay}>Оплатить сейчас</Button>
+				<Button className={classes.buttonPay}> Оплатить сейчас</Button>
 			</div>
 		</div>
 	)
