@@ -9,7 +9,7 @@ import {
 	deletePizzaFromCart,
 	incrementPizzaCounter
 } from 'store/reducers'
-import { getCartItemsTotalCount, getCartTotalPrice } from 'store/reducers/cartSlice/selectors'
+import { selectCartItemsTotalCount, selectCartTotalPrice } from 'store/reducers/cartSlice/selectors'
 import { Button, Icon } from 'ui-kit'
 import classes from './CartList.module.scss'
 
@@ -20,8 +20,8 @@ interface Props {
 export const CartList: FC<Props> = ({ items }): JSX.Element => {
 	const dispatch = useAppDispatch()
 
-	const totalPrice = useAppSelector(getCartTotalPrice)
-	const totalCount = useAppSelector(getCartItemsTotalCount)
+	const totalPrice = useAppSelector(selectCartTotalPrice)
+	const totalCount = useAppSelector(selectCartItemsTotalCount)
 
 	const onIncrementCounter = useCallback((pizza: ICartItem) => {
 		dispatch(incrementPizzaCounter(pizza))

@@ -1,3 +1,5 @@
+@import 'styles';
+
 .emptyCart {
     text-align: center;
     display: flex;
@@ -6,7 +8,7 @@
     max-width: 500px;
     margin: 90px auto;
 
-    @media (max-width: 576px) {
+    @media (max-width: $breakpoint-xs) {
         margin: 25px auto;
     }
 }
@@ -17,7 +19,7 @@
     line-height: 39px;
     margin-bottom: 10px;
 
-    @media (max-width: 576px) {
+    @media (max-width: $breakpoint-xs) {
         font-size: 24px;
         line-height: 24px;
     }
@@ -30,7 +32,7 @@
     line-height: 26px;
     margin-bottom: 47px;
 
-    @media (max-width: 576px) {
+    @media (max-width: $breakpoint-xs) {
         line-height: 20px;
         margin-bottom: 24px;
     }
@@ -43,7 +45,7 @@
     height: 100%;
     margin-bottom: 74px;
 
-    @media (max-width: 576px) {
+    @media (max-width: $breakpoint-xs) {
         margin-bottom: 24px;
 
     }
@@ -54,7 +56,7 @@
     max-width: 210px;
     width: 100%;
 
-    @media (max-width: 576px) {
+    @media (max-width: $breakpoint-xs) {
         max-width: 100%;
     }
 }

@@ -1,25 +1,27 @@
+@import 'styles';
+
 .container {
     margin: 0 auto;
-    max-width: 1280px;
+    max-width: $container-xl;
     padding-left: 30px;
     padding-right: 30px;
     width: 100%;
 
-    @media (max-width: 1200px) {
-        max-width: 1140px;
+    @media (max-width: $breakpoint-lg) {
+        max-width: $container-lg;
+    }
+
+    @media (max-width: $breakpoint-md) {
+        max-width: $container-md;
         padding-left: 15px;
         padding-right: 15px;
     }
 
-    @media (max-width: 992px) {
-        max-width: 960px;
+    @media (max-width: $breakpoint-sm) {
+        max-width: $container-sm;
     }
 
-    @media (max-width: 768px) {
-        max-width: 720px;
-    }
-
-    @media (max-width: 576px) {
-        max-width: 540px;
+    @media (max-width: $breakpoint-xs) {
+        max-width: $container-xs;
     }
 }

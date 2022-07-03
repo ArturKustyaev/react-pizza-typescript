@@ -1,11 +1,20 @@
+@import 'styles';
+
 .button {
     font-size: 16px;
     padding-left: 24px;
     padding-right: 24px;
 
-    @media (max-width: 576px) {
-        padding-left: 15px;
-        padding-right: 15px;
+    @media (max-width: $breakpoint-xs) {
+        border-radius: 50%;
+        bottom: 30px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+        cursor: pointer;
+        height: 70px;
+        position: fixed;
+        right: 30px;
+        width: 70px;
+        z-index: 500;
     }
 }
 
@@ -14,15 +23,20 @@
     position: relative;
     top: 2px;
 
-
+    @media (max-width: $breakpoint-xs) {
+        margin: 0;
+        top: 0;
+        width: 30px;
+        height: 30px;
+    }
 }
 
 .price {
     padding-right: 13px;
     position: relative;
 
-    @media (max-width: 576px) {
-        padding-right: 8px;
+    @media (max-width: $breakpoint-xs) {
+        display: none;
     }
 
     &::after {
@@ -40,7 +54,13 @@
 .count {
     padding-left: 13px;
 
-    @media (max-width: 576px) {
-        padding-left: 8px;
+    @media (max-width: $breakpoint-xs) {
+        padding: 0;
+        display: flex;
+        align-items: center;
+
+        span {
+            display: none;
+        }
     }
 }

@@ -1,3 +1,5 @@
+@import 'styles';
+
 .title {
     color: #000000;
     font-size: 32px;
@@ -19,7 +21,7 @@
     margin-right: -15px;
     flex-wrap: wrap;
 
-    @media (max-width: 576px) {
+    @media (max-width: $breakpoint-xs) {
         justify-content: center;
     }
 }
@@ -33,7 +35,7 @@
         margin-bottom: 65px;
     }
 
-    @media (max-width: 992px) {
+    @media (max-width: $breakpoint-md) {
         width: calc(33% - 30px);
 
         &:not(:nth-last-child(-n + 3)) {
@@ -41,7 +43,7 @@
         }
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: $breakpoint-sm) {
         width: calc(50% - 30px);
 
         &:not(:nth-last-child(-n + 2)) {
@@ -49,8 +51,8 @@
         }
     }
 
-    @media (max-width: 576px) {
-        width: calc(100% - 30px);   
+    @media (max-width: $breakpoint-xs) {
+        width: calc(100% - 30px);
 
         &:not(:last-child) {
             margin-bottom: 30px;

@@ -1,4 +1,3 @@
-import { useWhyDidYouUpdate } from 'ahooks'
 import classNames from 'classnames'
 import { ButtonHTMLAttributes, FC, memo, ReactNode } from 'react'
 import { Link } from 'react-router-dom'
@@ -26,10 +25,9 @@ export const Button: FC<Props> = memo(
 		disabled,
 		...rest
 	}): JSX.Element => {
-		const buttonClasses = classNames(classes.button, className, {
-			[classes.button_black]: color === 'black',
-			[classes.button_outlined]: variant === 'outlined',
-			[classes.button_disabled]: disabled
+		const buttonClasses = classNames(classes.button, classes[`button__${color}`], className, {
+			[classes[`button__${color}--outlined`]]: variant === 'outlined',
+			[classes.button__disabled]: disabled
 		})
 
 		return to ? (

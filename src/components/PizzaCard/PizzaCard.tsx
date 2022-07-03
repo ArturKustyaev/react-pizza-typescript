@@ -2,8 +2,8 @@ import classNames from 'classnames'
 import { useAppSelector } from 'hooks'
 import { ICartItem, IPizza } from 'models'
 import { FC, HTMLAttributes, useState } from 'react'
-import { getPizzaCountByParams } from 'store/reducers/cartSlice/selectors'
-import { Button } from 'ui-kit'
+import { selectPizzaCountByParams } from 'store/reducers/cartSlice/selectors'
+import { Button, Skeleton } from 'ui-kit'
 import classes from './PizzaCard.module.scss'
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -27,7 +27,7 @@ export const PizzaCard: FC<Props> = ({ className, pizza, onAddPizzaToCart }): JS
 	})
 
 	const totalPizzaCount = useAppSelector(
-		getPizzaCountByParams({
+		selectPizzaCountByParams({
 			id: pizza.id,
 			size: pizzaParams.size,
 			dough: pizzaParams.dough
@@ -76,10 +76,10 @@ export const PizzaCard: FC<Props> = ({ className, pizza, onAddPizzaToCart }): JS
 
 	return (
 		<div className={classNames(classes.pizzaCard, className)}>
-			{isLoading && <div className={classes.img_skeleton}></div>}
+			{isLoading && <Skeleton className={classes.img__skeleton} variant='circular' />}
 			<img
 				className={classNames(classes.img, {
-					[classes.img_hide]: isLoading
+					[classes.img__hide]: isLoading
 				})}
 				src={pizza.img}
 				alt={`Пицца: ${pizza.title}`}

@@ -1,10 +1,9 @@
-@import '../../assets/styles/colors.scss';
+@import 'styles';
 
 .button {
     align-items: center;
-    background-color: $orange;
     border-radius: 30px;
-    border: 1px solid $orange;
+    border: 1px solid transparent;
     color: white;
     cursor: pointer;
     display: inline-flex;
@@ -14,37 +13,41 @@
     line-height: 38px;
     padding: 0 15px;
     transition: background-color 0.2s, border 0.2s, color 0.2s;
-    user-select: none;
+}
+
+.button__orange {
+    background-color: $orange;
+    border-color: $orange;
 
     &:hover {
         background-color: lighten($orange, 15%);
         border-color: lighten($orange, 15%);
     }
 
-    &_outlined {
-        background-color: white;
+    &--outlined {
         border-color: $orange;
+        background-color: white;
         color: $orange;
 
         &:hover {
             border-color: darken($orange, 10%);
             color: darken($orange, 10%);
-            background-color: #e8e8e838;
+            background-color: #fff3ef;
         }
     }
+}
 
-    &_black {
-        background-color: #282828;
-        border-color: #282828;
+.button__black {
+    background-color: #282828;
+    border-color: #282828;
 
-        &:hover {
-            background-color: lighten(#282828, 15%);
-            border-color: lighten(#282828, 15%);
-        }
+    &:hover {
+        background-color: lighten(#282828, 15%);
+        border-color: lighten(#282828, 15%);
     }
+}
 
-    &_disabled {
-        background-color: lighten($orange, 15%);
-        cursor: default;
-    }
+.button__disabled {
+    background-color: lighten($orange, 15%);
+    cursor: default;
 }

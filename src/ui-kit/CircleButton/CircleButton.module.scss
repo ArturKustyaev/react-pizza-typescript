@@ -1,6 +1,8 @@
+@import 'styles';
+
 @mixin line {
     border-radius: 10px;
-    border: 1px solid #FE5F1E;
+    border: 1px solid $orange;
     content: '';
     left: 50%;
     position: absolute;
@@ -10,7 +12,7 @@
 .button {
     background-color: white;
     border-radius: 50%;
-    border: 2px solid #FE5F1E;
+    border: 2px solid $orange;
     cursor: pointer;
     flex-shrink: 0;
     height: 32px;
@@ -30,12 +32,12 @@
         }
 
         &:hover {
-            border-color: #FE5F1E;
+            border-color: $orange;
         }
 
         &:hover::after {
-            border-color: #FE5F1E;
-            background-color: #FE5F1E;
+            border-color: $orange;
+            background-color: $orange;
         }
     }
 
@@ -43,7 +45,7 @@
         &::after {
             @include line;
             width: 9px;
-            background-color: #FE5F1E;
+            background-color: $orange;
             transform: translate(-50%, -50%);
         }
     }
@@ -52,7 +54,7 @@
 
         &::after,
         &::before {
-            background-color: #FE5F1E;
+            background-color: $orange;
             transform: translate(-50%, -50%);
         }
 

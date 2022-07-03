@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import { FC } from 'react'
+import { Skeleton } from 'ui-kit'
 import classes from './PizzaCardSkeleton.module.scss'
 
 interface Props {
@@ -9,12 +10,12 @@ interface Props {
 export const PizzaCardSkeleton: FC<Props> = ({ className }): JSX.Element => {
 	return (
 		<div className={classNames(className, classes.body)}>
-			<div className={classes.img}></div>
-			<div className={classes.title}></div>
-			<div className={classes.variants}></div>
+			<Skeleton className={classes.img} variant='circular' />
+			<Skeleton className={classes.title} />
+			<Skeleton className={classes.variants} />
 			<div className={classes.actions}>
-				<div className={classes.price}></div>
-				<div className={classes.button}></div>
+				<Skeleton className={classes.price} />
+				<Skeleton className={classes.button} />
 			</div>
 		</div>
 	)

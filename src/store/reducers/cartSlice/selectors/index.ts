@@ -1,5 +1,5 @@
-import getCartItemsTotalCount from './getCartItemsTotalCount'
-import getCartTotalPrice from './getCartTotalPrice'
-import getPizzaCountByParams from './getPizzaCountByParams'
+import selectCartItemsTotalCount from './selectCartItemsTotalCount'
+import selectCartTotalPrice from './selectCartTotalPrice'
+import selectPizzaCountByParams from './selectPizzaCountByParams'
 
-export { getCartItemsTotalCount, getCartTotalPrice, getPizzaCountByParams }
+export { selectCartItemsTotalCount, selectCartTotalPrice, selectPizzaCountByParams }

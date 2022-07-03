@@ -1,12 +1,14 @@
+@import 'styles';
+
 .root {
     margin: 94px auto 0 auto;
     max-width: 830px;
 
-    @media (max-width: 768px) {
+    @media (max-width: $breakpoint-sm) {
         margin: 60x auto 0 auto;
     }
 
-    @media (max-width: 576px) {
+    @media (max-width: $breakpoint-xs) {
         margin: 30px auto 0 auto;
     }
 }
@@ -19,8 +21,8 @@
     top: 2px;
     width: 40px;
 
-    @media (max-width: 576px) {
-       display: none;
+    @media (max-width: $breakpoint-xs) {
+        display: none;
     }
 }
 
@@ -33,7 +35,7 @@
     letter-spacing: 0.01em;
     padding-bottom: 30px;
 
-    @media (max-width: 576px) {
+    @media (max-width: $breakpoint-xs) {
         font-size: 24px;
         flex-direction: column;
         align-items: flex-start;
@@ -83,8 +85,8 @@
     line-height: 27px;
     margin-bottom: 40px;
 
-    
-    @media (max-width: 576px) {
+
+    @media (max-width: $breakpoint-xs) {
         flex-direction: column;
         gap: 15px;
         align-items: flex-start;
@@ -99,7 +101,7 @@
 }
 
 .totalPrice {
-    color: #FE5F1E;
+    color: $orange;
     display: inline-block;
     font-weight: 700;
     margin-left: 8px;
@@ -109,7 +111,7 @@
     display: flex;
     justify-content: space-between;
 
-    @media (max-width: 576px) {
+    @media (max-width: $breakpoint-xs) {
         flex-direction: column;
         gap: 15px;
     }
@@ -123,16 +125,18 @@
     max-width: 210px;
     width: 100%;
 
-    @media (max-width: 576px) {
+    @media (max-width: $breakpoint-xs) {
         max-width: 100%;
     }
 }
 
 .buttonBack {
     border-color: #D3D3D3;
+    background-color: white;
     color: #D3D3D3;
 
     &:hover {
+        background-color: darken(white, 2%);
         border-color: darken(#D3D3D3, 10%);
         color: darken(#D3D3D3, 10%)
     }
