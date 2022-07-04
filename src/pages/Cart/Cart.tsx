@@ -1,5 +1,4 @@
-import { CartList, Container, Layout } from 'components'
-import EmpryCart from 'components/EmptyCart'
+import { CartList, Container, Layout, EmpryCart } from 'components'
 import { useAppSelector } from 'hooks'
 import { Header } from 'layout'
 import { FC } from 'react'
