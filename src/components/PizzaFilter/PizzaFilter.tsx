@@ -16,7 +16,7 @@ export interface IPizzaType {
 const pizzaTypes: IPizzaType[] = [
 	{
 		value: 'all',
-		text: 'Абсолютно все пиццы'
+		text: 'Все'
 	},
 	{
 		value: 'meat',
