@@ -30,18 +30,14 @@ const cartSlice = createSlice({
 			const { id, size, dough } = action.payload
 
 			state.items.map(cartItem =>
-				cartItem.id == id && cartItem.dough === dough && cartItem.size === size
-					? (cartItem.count += 1)
-					: cartItem
+				cartItem.id === id && cartItem.dough === dough && cartItem.size === size ? (cartItem.count += 1) : cartItem
 			)
 		},
 		decrementPizzaCounter(state, action: PayloadAction<ICartItem>) {
 			const { id, size, dough } = action.payload
 
 			state.items.map(cartItem =>
-				cartItem.id == id && cartItem.dough === dough && cartItem.size === size
-					? (cartItem.count -= 1)
-					: cartItem
+				cartItem.id === id && cartItem.dough === dough && cartItem.size === size ? (cartItem.count -= 1) : cartItem
 			)
 		},
 		deletePizzaFromCart(state, action: PayloadAction<ICartItem>) {
@@ -56,12 +52,7 @@ const cartSlice = createSlice({
 	}
 })
 
-export const {
-	addPizzaToCart,
-	incrementPizzaCounter,
-	decrementPizzaCounter,
-	deletePizzaFromCart,
-	clearCart
-} = cartSlice.actions
+export const { addPizzaToCart, incrementPizzaCounter, decrementPizzaCounter, deletePizzaFromCart, clearCart } =
+	cartSlice.actions
 
 export default cartSlice.reducer

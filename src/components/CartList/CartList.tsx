@@ -1,14 +1,8 @@
-import { useWhyDidYouUpdate } from 'ahooks'
 import CartItem from 'components/CartItem'
 import { useAppDispatch, useAppSelector } from 'hooks'
 import { ICartItem } from 'models'
 import { FC, useCallback } from 'react'
-import {
-	clearCart,
-	decrementPizzaCounter,
-	deletePizzaFromCart,
-	incrementPizzaCounter
-} from 'store/reducers'
+import { clearCart, decrementPizzaCounter, deletePizzaFromCart, incrementPizzaCounter } from 'store/reducers'
 import { selectCartItemsTotalCount, selectCartTotalPrice } from 'store/reducers/cartSlice/selectors'
 import { Button, Icon } from 'ui-kit'
 import classes from './CartList.module.scss'
@@ -23,21 +17,30 @@ export const CartList: FC<Props> = ({ items }): JSX.Element => {
 	const totalPrice = useAppSelector(selectCartTotalPrice)
 	const totalCount = useAppSelector(selectCartItemsTotalCount)
 
-	const onIncrementCounter = useCallback((pizza: ICartItem) => {
-		dispatch(incrementPizzaCounter(pizza))
-	}, [])
+	const onIncrementCounter = useCallback(
+		(pizza: ICartItem) => {
+			dispatch(incrementPizzaCounter(pizza))
+		},
+		[dispatch]
+	)
 
-	const onDecrementCounter = useCallback((pizza: ICartItem) => {
-		dispatch(decrementPizzaCounter(pizza))
-	}, [])
+	const onDecrementCounter = useCallback(
+		(pizza: ICartItem) => {
+			dispatch(decrementPizzaCounter(pizza))
+		},
+		[dispatch]
+	)
 
-	const onDeletePizzaFromCart = useCallback((pizza: ICartItem) => {
-		dispatch(deletePizzaFromCart(pizza))
-	}, [])
+	const onDeletePizzaFromCart = useCallback(
+		(pizza: ICartItem) => {
+			dispatch(deletePizzaFromCart(pizza))
+		},
+		[dispatch]
+	)
 
 	const clearCartHandler = useCallback(() => {
 		dispatch(clearCart())
-	}, [])
+	}, [dispatch])
 
 	return (
 		<div className={classes.root}>
@@ -48,7 +51,7 @@ export const CartList: FC<Props> = ({ items }): JSX.Element => {
 				</h2>
 				<button className={classes.buttonTrash} onClick={clearCartHandler}>
 					<Icon className={classes.trashIcon} type='trash' />
-					Очисить корзину
+					Очистить корзину
 				</button>
 			</div>
 			<ul className={classes.cartList}>

@@ -19,7 +19,7 @@ export const PizzaList: FC = (): JSX.Element => {
 
 	useEffect(() => {
 		dispatch(fetchPizzas({ pizzaType, sort }))
-	}, [pizzaType, sort])
+	}, [pizzaType, sort, dispatch])
 
 	return (
 		<div className={classes.pizzas}>
@@ -28,18 +28,10 @@ export const PizzaList: FC = (): JSX.Element => {
 				{!error && 'Все пиццы'}
 			</h1>
 			<div className={classes.pizzaList}>
-				{isFetching &&
-					[0, 0, 0, 0].map((_, index) => (
-						<PizzaCardSkeleton key={index} className={classes.pizzaCard} />
-					))}
+				{isFetching && [0, 0, 0, 0].map((_, index) => <PizzaCardSkeleton key={index} className={classes.pizzaCard} />)}
 				{isSuccesed &&
 					pizzas.map(pizza => (
-						<PizzaCard
-							className={classes.pizzaCard}
-							key={pizza.id}
-							pizza={pizza}
-							onAddPizzaToCart={onAddPizzaToCart}
-						/>
+						<PizzaCard className={classes.pizzaCard} key={pizza.id} pizza={pizza} onAddPizzaToCart={onAddPizzaToCart} />
 					))}
 			</div>
 		</div>

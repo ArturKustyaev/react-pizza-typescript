@@ -24,7 +24,7 @@ const pizzaTypes: IPizzaType[] = [
 	},
 	{
 		value: 'vegan',
-		text: 'Вегетерианские'
+		text: 'Вегетарианские'
 	},
 	{
 		value: 'mushroom',
@@ -40,9 +40,12 @@ export const PizzaFilter: FC = (): JSX.Element => {
 	const { pizzaType } = useAppSelector(state => state.filter)
 	const dispatch = useDispatch()
 
-	const onSelect = useCallback((selectedField: SortValueType) => {
-		dispatch(setSort(selectedField))
-	}, [])
+	const onSelect = useCallback(
+		(selectedField: SortValueType) => {
+			dispatch(setSort(selectedField))
+		},
+		[dispatch]
+	)
 
 	const setPizzaTypeHandler = (pizzaType: PizzaType) => {
 		dispatch(setFilter(pizzaType))
