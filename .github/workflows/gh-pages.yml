@@ -2,7 +2,7 @@ name: Build DEV
 on:
   push:
     branches:
-      - redisign
+      - master
 
 jobs:
   ci:
