@@ -24,11 +24,11 @@ jobs:
           restore-keys: |
             r1/${{ runner.os }}/npm/
       - run: npm ci
-      - run: CI=false npm run build:dev
+      - run: CI=false npm run build
 
       - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.REPO_TOKEN }}
-          publish_branch: build_redesign
+          publish_branch: gh-pages
           publish_dir: build
           force_orphan: true
