@@ -98,7 +98,6 @@ export const Select: FC<Props> = memo(
 				<div
 					className={classNames(classes.select, className)}
 					tabIndex={tabIndex}
-					role='combobox'
 					onClick={toggleDropdownHandler}
 					onKeyDown={keyDownHandler}
 					onBlur={closeHandler}

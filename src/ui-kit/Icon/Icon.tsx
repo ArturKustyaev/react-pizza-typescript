@@ -1,8 +1,7 @@
 import classNames from 'classnames'
 import { FC, HTMLAttributes, memo } from 'react'
-import { IconType, IconTypes } from './types'
 import classes from './Icon.module.scss'
-import { useWhyDidYouUpdate } from 'ahooks'
+import { IconType, IconTypes } from './types'
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
 	className?: string
