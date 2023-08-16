@@ -16,15 +16,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const Button: FC<Props> = memo(
-	({
-		className,
-		children,
-		color = 'orange',
-		variant = 'filled',
-		to = '',
-		disabled,
-		...rest
-	}): JSX.Element => {
+	({ className, children, color = 'orange', variant = 'filled', to = '', disabled, ...rest }): JSX.Element => {
 		const buttonClasses = classNames(classes.button, classes[`button__${color}`], className, {
 			[classes[`button__${color}--outlined`]]: variant === 'outlined',
 			[classes.button__disabled]: disabled
